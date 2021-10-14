@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Djuro",
+        "color": "siva",
+        "age": 2,
+        "image": "djuro.jpg"
+    },
+    {
+        "name": "Mili",
+        "color": "siva",
+        "age": 5,
+        "image": "mili.jpeg"
+    },
+    {
+        "name": "Vanili",
+        "color": "bijela",
+        "age": 6,
+        "image": "vanili.jpg"
+    },
+    {
+        "name": "Nemo",
+        "color": "zuta",
+        "age": 3,
+        "image": "nemo.jpg"
+    },
+    {
+        "name": "Mimi",
+        "color": "crna",
+        "age": 4,
+        "image": "mimi.jpeg"
+    },
+    {
+        "name": "Maks",
+        "color": "siva",
+        "age": 3,
+        "image": "maks.jpg"
+    }
+]
