@@ -32,3 +32,26 @@ body {
         transform: rotateZ(20deg)
     }
 }
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.kitten-carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-icon {
+        font-size: inherit !important;
+    }
+}
+
+.icon-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 3rem;
+}

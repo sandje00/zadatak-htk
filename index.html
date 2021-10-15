@@ -6,20 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="script.js"></script>
     <title>Udomi Me</title>
 </head>
 <body>
     <div class="logo">
-    <span class="logo-name">Udomi Me</span>
-    <span class="logo-icon material-icons">pets</span>
+        <span class="logo-name">Udomi Me</span>
+        <span class="logo-icon material-icons">pets</span>
     </div>
     <main>
-        <div class="kitten-carousel"></div>
+        <div id="carousel" class="kitten-carousel">
+            <div id="left" class="left kitten-carousell-nav">
+                <button class="icon-button">
+                    <span class="material-icons kitten-carousel-icon">
+                        arrow_circle_left
+                    </span>
+                </button>
+            </div>
+            <div class="kitten-carousell-content">
+                <div id="slide" class="kitten-carousell-slide"></div>
+            </div>
+            <div id="right" class="right kitten-carousell-nav">
+                <button class="icon-button">
+                    <span class="material-icons kitten-carousel-icon">
+                        arrow_circle_right
+                    </span>
+                </button>
+            </div>
+        </div>
         <div class="kitten-search">
             <div class="kitten-search-control"></div>
             <div class="kitten-search-list"></div>
         </div>
     </main>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -3,36 +3,36 @@
         "name": "Djuro",
         "color": "siva",
         "age": 2,
-        "image": "djuro.jpg"
+        "image": "/images/djuro.jpg"
     },
     {
         "name": "Mili",
         "color": "siva",
         "age": 5,
-        "image": "mili.jpeg"
+        "image": "/images/mili.jpeg"
     },
     {
         "name": "Vanili",
         "color": "bijela",
         "age": 6,
-        "image": "vanili.jpg"
+        "image": "/images/vanili.jpg"
     },
     {
         "name": "Nemo",
         "color": "zuta",
         "age": 3,
-        "image": "nemo.jpg"
+        "image": "/images/nemo.jpg"
     },
     {
         "name": "Mimi",
         "color": "crna",
         "age": 4,
-        "image": "mimi.jpeg"
+        "image": "/images/mimi.jpeg"
     },
     {
         "name": "Maks",
         "color": "siva",
         "age": 3,
-        "image": "maks.jpg"
+        "image": "/images/maks.jpg"
     }
 ]
