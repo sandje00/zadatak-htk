@@ -1,3 +1,53 @@
+class Kittens {
+    constructor(entries) {
+        this.entries = entries;
+        this.visibleEntries = this.sortByKey('age', 'asc');
+    }
+    
+    sortByKey(key, order) {
+        const isAscending = order === 'asc' || !(order === 'desc');
+        if (key == 'age') return this._sortByAge(isAscending);
+        if (key == 'name') return this._sortByName(isAscending);
+    }
+
+    getTopN(n, key) {
+        const sorted = this.sortByKey(key);
+        return n <= sorted.length && sorted.slice(0, n);
+    }
+
+    filterByKey(key, value) {
+        if (key === 'age') this.visibleEntries = this._filterByAge(value);
+        if (key === 'color') this.visibleEntries = this._filterByColor(value);
+
+        return this.visibleEntries;
+    }
+    
+    _sortByAge(isAscending) {
+        return this.entries.sort((a, b) => {
+            return isAscending ? a.age - b.age : b.age - a.age;
+        });
+    }
+
+    _sortByName(isAscending) {
+        return this.entries.sort((a, b) => {
+            let nameA = a.name.toUpperCase();
+            let nameB = b.name.toUpperCase();
+            if (nameA < nameB) return isAscending ? -1 : 1;
+            if (nameA > nameB) return isAscending ? 1 : -1;
+            return 0;
+        });
+    }
+
+    _filterByAge(value) {
+        return this.visibleEntries.filter(it => it.age <= value);
+    }
+
+    _filterByColor(value) {
+        return this.visibleEntries.filter(it => it.color === value);
+    }
+    
+}
+
 /* Fetch data */
 
 async function loadJSON(path) {
@@ -6,18 +56,22 @@ async function loadJSON(path) {
 }
 
 async function main() {
-    kittens = await loadJSON('/kittens.json');
-    localStorage.setItem('kittens', JSON.stringify(kittens))
+    const data = await loadJSON('/kittens.json');
+    localStorage.setItem('kittens', JSON.stringify(data))
 }
 
 main();
 
-let kittens = JSON.parse(localStorage.getItem('kittens'));
+const kittens = new Kittens(JSON.parse(localStorage.getItem('kittens')));
 
+// Test
+
+console.log(kittens.entries);
+console.log(kittens.visibleEntries);
 
 /* Carousel logic */
 
-function getYoungestN(n) {
+/* function getYoungestN(n) {
     let sorted = kittens.sort((a, b) => {
         return a.age - b.age;
     });
@@ -57,3 +111,4 @@ arrowLeft.addEventListener('click', function () {
     img.src = youngestFour[ctr].image;
     img.alt = youngestFour[ctr].name;
 });
+ */
