@@ -23,13 +23,13 @@ class Kittens {
     }
     
     _sortByAge(isAscending) {
-        return this.entries.sort((a, b) => {
+        return this.entries.slice().sort((a, b) => {
             return isAscending ? a.age - b.age : b.age - a.age;
         });
     }
 
     _sortByName(isAscending) {
-        return this.entries.sort((a, b) => {
+        return this.entries.slice().sort((a, b) => {
             let nameA = a.name.toUpperCase();
             let nameB = b.name.toUpperCase();
             if (nameA < nameB) return isAscending ? -1 : 1;
