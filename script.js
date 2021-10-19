@@ -64,11 +64,6 @@ main();
 
 const kittens = new Kittens(JSON.parse(localStorage.getItem('kittens')));
 
-// Test
-
-console.log(kittens.entries);
-console.log(kittens.visibleEntries);
-
 /* Carousel logic */
 
 /* function getYoungestN(n) {
@@ -112,3 +107,25 @@ arrowLeft.addEventListener('click', function () {
     img.alt = youngestFour[ctr].name;
 });
  */
+
+function createKittenCard(kitten) {
+    return `
+        <div class="kitten-search-card">
+            <img src="${kitten.image}" alt="${kitten.name}" class="image">
+            <div class="container">
+                <h4><b>${kitten.name}</b></h4>
+                <span>Starost: ${kitten.age}</span>
+                <span>Boja: ${kitten.color}</span>
+            </div>
+        </div>
+    `;
+}
+
+let searchList = document.getElementById('kitten-search-list');
+let NUMBER_OF_ENTRIES = 4;
+
+let visibleKittens = kittens.getTopN(NUMBER_OF_ENTRIES, 'age');
+visibleKittens.forEach(kitten => {
+    let el = createKittenCard(kitten);
+    searchList.innerHTML += el;
+});
