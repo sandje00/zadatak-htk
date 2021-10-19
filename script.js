@@ -108,6 +108,34 @@ arrowLeft.addEventListener('click', function () {
 });
  */
 
+
+let NUMBER_OF_ENTRIES = 4;
+let visibleKittensInitial = kittens.getTopN(NUMBER_OF_ENTRIES, 'age');
+renderVisibleKittens(visibleKittensInitial);
+
+let radioSortBy = document.querySelectorAll('input[type=radio][name="sort-by"]');
+let currentSortBy = 'age';
+radioSortBy.forEach(radio => {
+    radio.checked = radio.value === currentSortBy;
+    radio.addEventListener('change', e => onSortByValueChange(e));
+});
+
+let radioSortOrder = document.querySelectorAll('input[type=radio][name="sort-order"]');
+let currentSortOrder = 'asc';
+radioSortOrder.forEach(radio => {
+    radio.checked = radio.value === currentSortOrder;
+    radio.addEventListener('change', e => onSortOrderValueChange(e));
+});
+
+function renderVisibleKittens(visibleKittens) {
+    let searchList = document.getElementById('kitten-search-list');
+    if (searchList.hasChildNodes()) searchList.innerHTML = '';
+    visibleKittens.forEach(kitten => {
+        let el = createKittenCard(kitten);
+        searchList.innerHTML += el;
+    });
+}
+
 function createKittenCard(kitten) {
     return `
         <div class="kitten-search-card">
@@ -121,11 +149,12 @@ function createKittenCard(kitten) {
     `;
 }
 
-let searchList = document.getElementById('kitten-search-list');
-let NUMBER_OF_ENTRIES = 4;
+function onSortByValueChange(e) {
+    currentSortByvc= e.target.value;
+    renderVisibleKittens(kittens.sortByKey(currentSortBy, currentSortOrder));
+}
 
-let visibleKittens = kittens.getTopN(NUMBER_OF_ENTRIES, 'age');
-visibleKittens.forEach(kitten => {
-    let el = createKittenCard(kitten);
-    searchList.innerHTML += el;
-});
+function onSortOrderValueChange(e) {
+    currentSortOrder = e.target.value;
+    renderVisibleKittens(kittens.sortByKey(currentSortBy, currentSortOrder));
+}
