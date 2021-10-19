@@ -41,7 +41,7 @@
                         <div class="choice-group">
                             <div class="choice-container">
                                 <input type="radio" name="sort-by" value="age" id="sort-by-age" class="choice-radio">
-                                <label class="choice-label">dobi</label>
+                                <label class="choice-label">starosti</label>
                             </div>
                             <div class="choice-container">
                                 <input type="radio" name="sort-by" value="name" id="sort-by-name" class="choice-radio">
@@ -67,15 +67,15 @@
                     <p>Filtriraj:</p>
                     <div class="choice-group">
                         <div class="choice-container">
-                            <input type="checkbox" name="younger-than-12" value="12" class="choice-checkbox">
+                            <input type="checkbox" name="age" value="12" class="choice-checkbox">
                             <label class="choice-label">Mačić je mlađi od 12 mjeseci</label>
                         </div>
                         <div class="choice-container">
-                            <input type="checkbox" name="younger-than-6" value="6" class="choice-checkbox">
+                            <input type="checkbox" name="age" value="6" class="choice-checkbox">
                             <label class="choice-label">Mačić je mlađi od 6 mjeseci</label>
                         </div>
                         <div class="choice-container">
-                            <input type="checkbox" name="color-black" value="black" class="choice-checkbox">
+                            <input type="checkbox" name="color" value="crna" class="choice-checkbox">
                             <label class="choice-label">Boja mačića je crna</label>
                         </div>
                     </div>
@@ -84,6 +84,6 @@
             <div id="kitten-search-list" class ="kitten-search-list"></div>
         </div>
     </main>
-    <script src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>
