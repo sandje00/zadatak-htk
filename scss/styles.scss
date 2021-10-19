@@ -61,6 +61,29 @@ main {
     font-size: 3rem;
 }
 
+.kitten-search-control {
+    display: flex;
+    flex-direction: column;
+
+    .choice {
+        margin-top: 1.5rem;
+        margin-right: 3rem;
+
+        &-sort {
+            display: flex;
+        }
+
+        &-group {
+            display: flex;
+            flex-direction: row;
+        }
+
+        &-container {
+            margin-right: 2rem;
+        }
+    }
+}
+
 .kitten-search {
     margin: 0 auto;
 

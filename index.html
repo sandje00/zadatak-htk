@@ -35,20 +35,50 @@
         </div>
         <div class="kitten-search">
             <div class="kitten-search-control">
-                <div id="sort-by">
-                    <p>Sortiraj po:</p>
-                    <input type="radio" name="sort-by-age" value="dobi">
-                    <input type="radio" name="sort-by-name" value="imenu">
+                <div class="choice-sort">
+                    <div class="choice">
+                        <p>Sortiraj po:</p>
+                        <div class="choice-group">
+                            <div class="choice-container">
+                                <input type="radio" name="sort-by-age" value="age" class="choice-radio">
+                                <label class="choice-label">dobi</label>
+                            </div>
+                            <div class="choice-container">
+                                <input type="radio" name="sort-by-name" value="name" class="choice-radio">
+                                <label class="choice-label">imenu</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="choice">
+                        <p>Sortiraj u smjeru:</p>
+                        <div class="choice-group">
+                            <div class="choice-container">
+                                <input type="radio" name="sort-asc" value="asc" class="choice-radio">
+                                <label class="choice-label">asc</label>
+                            </div>
+                            <div class="choice-container">
+                                <input type="radio" name="sort-desc" value="desc" class="choice-radio">
+                                <label class="choice-label">desc</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div id="order">
-                    <p>Sortiraj u smjeru:</p>
-                    <input type="radio" name="asc" value="asc">
-                    <input type="radio" name="desc" value="desc">
-                </div>
-                <div id="filters">
-                    <input type="checkbox" name="younger-than-12" value="Mačić je mlađi od 12 mjeseci">
-                    <input type="checkbox" name="younger-than-6" value="Mačić je mlađi od 6 mjeseci" >
-                    <input type="checkbox" name="color-black" value="Boja mačića je crna">
+                <div class="choice">
+                    <p>Filtriraj:</p>
+                    <div class="choice-group">
+                        <div class="choice-container">
+                            <input type="checkbox" name="younger-than-12" value="12" class="choice-checkbox">
+                            <label class="choice-label">Mačić je mlađi od 12 mjeseci</label>
+                        </div>
+                        <div class="choice-container">
+                            <input type="checkbox" name="younger-than-6" value="6" class="choice-checkbox">
+                            <label class="choice-label">Mačić je mlađi od 6 mjeseci</label>
+                        </div>
+                        <div class="choice-container">
+                            <input type="checkbox" name="color-black" value="black" class="choice-checkbox">
+                            <label class="choice-label">Boja mačića je crna</label>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div id="kitten-search-list" class ="kitten-search-list"></div>
