@@ -10,19 +10,26 @@ class Kittens {
         if (key == 'age') return this._sortByAge(isAscending);
         if (key == 'name') return this._sortByName(isAscending);
     }
-
-    getTopN(n, key) {
-        const sorted = this.sortByKey(key);
-        return n <= sorted.length && sorted.slice(0, n);
-    }
-
+    
     filterByKey(key, value) {
         this.previouslyVisibleEntries.push([...this.visibleEntries]);
         if (key === 'age') this.visibleEntries = this._filterByAge(value);
         if (key === 'color') this.visibleEntries = this._filterByColor(value);
         return this.visibleEntries;
     }
+    
+    searchByKey(key, keyword) {
+        return this.visibleEntries.filter(it => it[key]
+            .toString()
+            .toUpperCase()
+            .includes(keyword));
+    }
 
+    getTopN(n, key) {
+        const sorted = this.sortByKey(key);
+        return n <= sorted.length && sorted.slice(0, n);
+    }
+    
     removeFilter() {
         this.visibleEntries = this.previouslyVisibleEntries.pop();
         return this.visibleEntries;

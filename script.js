@@ -45,8 +45,21 @@ function createCarouselSlide(item) {
     return `<img src=${item.image} alt=${item.alt}>`;
 }
 
-/** Order and filtering logic **/
-    
+
+/* Search dashboard logic */
+
+/* Search */
+
+let searchBox = document.getElementById('kitten-search-box');
+searchBox.addEventListener('keyup', e => onSearch(e));
+
+function onSearch(e) {
+    let keyword = e.target.value.toUpperCase();
+    renderVisibleKittens(kittens.searchByKey('name', keyword));
+}
+
+/* Order and filter */
+
 const NUMBER_OF_ENTRIES = 4;
 let visibleKittensInitial = kittens.getTopN(NUMBER_OF_ENTRIES, 'age');
 renderVisibleKittens(visibleKittensInitial);
@@ -99,11 +112,12 @@ function createKittenCard(kitten) {
         <div class="kitten-search-card">
             <img src="${kitten.image}" alt="${kitten.name}" class="image">
             <div class="container">
-                <h4><b>${kitten.name}</b></h4>
+                <h4>${kitten.name}</h4>
                 <span>Starost: ${kitten.age}</span>
                 <span>Boja: ${kitten.color}</span>
             </div>
         </div>
         `;
 }
+
     
