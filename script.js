@@ -22,13 +22,12 @@ const kittens = new Kittens(JSON.parse(localStorage.getItem('kittens')));
 
 const carouselController = new CarouselController(kittens.getTopN(4, 'age'));
 
-loadCarousel();
+loadCarousel(carouselController.getCurrentItem());
 
 let arrows = document.querySelectorAll('.kitten-carousel-icon');
 arrows.forEach(arrow => arrow.addEventListener('click', e => onArrowClick(e)));
 
 function onArrowClick(e) {
-    console.log(e.target);
     const arrow = e.target;
     if (arrow.classList.contains('right'))
         loadCarousel(carouselController.moveRight());
@@ -36,9 +35,8 @@ function onArrowClick(e) {
         loadCarousel(carouselController.moveLeft());
 }
 
-function loadCarousel() {
+function loadCarousel(currentItem) {
     let carouselSlide = document.getElementById('slide');
-    let currentItem = carouselController.getCurrentItem();
     carouselSlide.innerHTML = '';
     carouselSlide.innerHTML += createCarouselSlide(currentItem);
 }
