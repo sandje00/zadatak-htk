@@ -47,7 +47,7 @@ function createCarouselSlide(item) {
     return `<img src=${item.image} alt=${item.alt}>`;
 }
 
-/** Search dashboard logic **/
+/** Order and filtering logic **/
     
 const NUMBER_OF_ENTRIES = 4;
 let visibleKittensInitial = kittens.getTopN(NUMBER_OF_ENTRIES, 'age');
@@ -69,6 +69,23 @@ radioSortOrder.forEach(radio => {
 
 let checkboxFilter = document.querySelectorAll('input[type=checkbox]');
 checkboxFilter.forEach(filter => filter.addEventListener('change', e => onFilterValueChange(e)));
+    
+function onSortByValueChange(e) {
+    currentSortBy = e.target.value;
+    renderVisibleKittens(kittens.sortByKey(currentSortBy, currentSortOrder));
+}
+    
+function onSortOrderValueChange(e) {
+    currentSortOrder = e.target.value;
+    renderVisibleKittens(kittens.sortByKey(currentSortBy, currentSortOrder));
+}
+    
+function onFilterValueChange(e) {
+    if (e.target.checked)
+        renderVisibleKittens(kittens.filterByKey(e.target.name, e.target.value));
+    else
+        renderVisibleKittens(kittens.removeFilter());
+}
 
 function renderVisibleKittens(visibleKittens) {
     let searchList = document.getElementById('kitten-search-list');
@@ -90,22 +107,5 @@ function createKittenCard(kitten) {
             </div>
         </div>
         `;
-}
-    
-function onSortByValueChange(e) {
-    currentSortBy = e.target.value;
-    renderVisibleKittens(kittens.sortByKey(currentSortBy, currentSortOrder));
-}
-    
-function onSortOrderValueChange(e) {
-    currentSortOrder = e.target.value;
-    renderVisibleKittens(kittens.sortByKey(currentSortBy, currentSortOrder));
-}
-    
-function onFilterValueChange(e) {
-    if (e.target.checked)
-        renderVisibleKittens(kittens.filterByKey(e.target.name, e.target.value));
-    else
-        renderVisibleKittens(kittens.removeFilter());
 }
     
