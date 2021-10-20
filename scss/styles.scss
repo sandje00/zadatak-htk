@@ -49,16 +49,16 @@ main {
     justify-content: center;
     align-items: center;
 
+    &-button {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 3rem;
+    }
+
     &-icon {
         font-size: inherit !important;
     }
-}
-
-.icon-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 3rem;
 }
 
 .kitten-search-control {
