@@ -9,7 +9,7 @@ class CarouselController {
     }
 
     moveRight() {
-        this.counter = this.counter === this.items.length ? 0 : this.counter + 1;
+        this.counter = this.counter === this.items.length - 1 ? 0 : this.counter + 1;
         return this.getCurrentItem();
     }
 

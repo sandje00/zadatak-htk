@@ -24,7 +24,7 @@ const carouselController = new CarouselController(kittens.getTopN(4, 'age'));
 
 loadCarousel();
 
-let arrows = document.querySelectorAll('.kitten-carousel-button');
+let arrows = document.querySelectorAll('.kitten-carousel-icon');
 arrows.forEach(arrow => arrow.addEventListener('click', e => onArrowClick(e)));
 
 function onArrowClick(e) {
@@ -39,6 +39,7 @@ function onArrowClick(e) {
 function loadCarousel() {
     let carouselSlide = document.getElementById('slide');
     let currentItem = carouselController.getCurrentItem();
+    carouselSlide.innerHTML = '';
     carouselSlide.innerHTML += createCarouselSlide(currentItem);
 }
 
