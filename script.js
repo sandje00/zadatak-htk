@@ -48,8 +48,6 @@ function createCarouselSlide(item) {
 
 /* Search dashboard logic */
 
-/* Search */
-
 let searchBox = document.getElementById('kitten-search-box');
 searchBox.addEventListener('keyup', e => onSearch(e));
 
@@ -57,8 +55,6 @@ function onSearch(e) {
     let keyword = e.target.value.toUpperCase();
     renderVisibleKittens(kittens.searchByKey('name', keyword));
 }
-
-/* Order and filter */
 
 const NUMBER_OF_ENTRIES = 4;
 let visibleKittensInitial = kittens.getTopN(NUMBER_OF_ENTRIES, 'age');
@@ -119,5 +115,4 @@ function createKittenCard(kitten) {
         </div>
         `;
 }
-
     
