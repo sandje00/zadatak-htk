@@ -104,8 +104,9 @@ function renderVisibleKittens(visibleKittens) {
 }
 
 function createKittenCard(kitten) {
+    let id = kittens.entries.indexOf(kitten);
     return `
-        <div class="kitten-search-card">
+        <div id="kitten-${id}" class="kitten-search-card">
             <img src="${kitten.image}" alt="${kitten.name}" class="image">
             <div class="container">
                 <h4>${kitten.name}</h4>
@@ -113,6 +114,47 @@ function createKittenCard(kitten) {
                 <span>Boja: ${kitten.color}</span>
             </div>
         </div>
-        `;
+    `;
 }
-    
+
+
+/* Modal logic */
+
+let kittenCards = document.querySelectorAll('.kitten-search-card');
+kittenCards.forEach(card => card.addEventListener('click', e => onCardClick(e)));
+
+function onCardClick(e) {
+    let kittenCard = e.target.closest('.kitten-search-card');
+    let id = parseInt(kittenCard.id.slice(-1));
+    showModal(kittens.entries[id]);
+}
+
+function showModal(kitten) {
+    let kittenInfo = createKittenInfoElement(kitten);
+    let modal = document.getElementById('kitten-modal');
+    let modalContent = modal.querySelectorAll('.modal-content')[0];
+    modalContent.insertBefore(kittenInfo, modalContent.firstChild);
+    modal.classList.toggle('display-none');
+}
+
+function createKittenInfoElement(kitten) {
+    let kittenInfo = `
+        <h4>${kitten.name}</h4>
+        <span>Starost: ${kitten.age}</span>
+        <span>Boja: ${kitten.color}</span>
+    `;
+    let kittenInfoContainer = document.createElement('div');
+    kittenInfoContainer.classList.add('container');
+    kittenInfoContainer.innerHTML = kittenInfo;
+    return kittenInfoContainer;
+}
+
+let closeButton = document.querySelectorAll('.modal-close')[0];
+closeButton.addEventListener('click', onCloseModal);
+
+function onCloseModal() {
+    let modal = document.getElementById('kitten-modal');
+    let modalContent = modal.querySelectorAll('.modal-content')[0];
+    modalContent.removeChild(modalContent.firstChild);
+    modal.classList.toggle('display-none');
+}

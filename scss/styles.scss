@@ -19,6 +19,16 @@ body {
     font-family: $font-family-primary;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+button {
+    border: none;
+}
+
 .logo {
     display: flex;
     color: $accent;
@@ -38,11 +48,6 @@ body {
     }
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
 
 .kitten-carousel {
     display: flex;
@@ -50,15 +55,17 @@ main {
     align-items: center;
 
     &-button {
-        background: none;
-        border: none;
-        cursor: pointer;
         font-size: 3rem;
     }
 
     &-icon {
         font-size: inherit !important;
     }
+}
+
+.icon-button {
+    background: none;
+    cursor: pointer;
 }
 
 .kitten-search-control {
@@ -133,5 +140,63 @@ main {
         height: 2rem;
         margin-top: 1.5rem;
         border: none;
+    }
+}
+
+.display-none {
+    display: none;
+}
+
+.modal {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 990;
+
+    &-overlay {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 995;
+        background: rgba(0,0,0,0.85);
+    }
+
+    &-content {
+        z-index: 999;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-height: 90%;
+        overflow: auto;
+        background: $white;
+        padding: 20px;
+        box-shadow: 0 1px 5px rgba(0,0,0,0.7);
+        border-radius: 4px;
+        width: 520px;
+    }
+
+    &-button {
+        background-color: $accent;
+        color: $white;
+        padding: 0.5rem 2rem;
+        border-radius: 8px;
+        cursor: pointer;
+    }
+
+    &-close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        opacity: 0.5;
+        background: none;
+        border: none;
+        transition: opacity 0.2s ease;
     }
 }
