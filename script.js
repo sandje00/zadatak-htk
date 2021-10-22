@@ -150,9 +150,12 @@ function onCloseButtonClick() {
 
 function onAdoptButtonClick() {
     let className = modal.classList[1];
-    let id = className.slice(-1);
-    removeKittenCard(id);
-    closeModal(className);
+    let id = parseInt(className.slice(-1));
+    let result = confirm(`Jeste li sigurni da zelite udomiti macica po imenu ${kittens.entries[id].name}`)
+    if (result) {
+        removeKittenCard(id);
+        closeModal(className);
+    }
 }
 
 function showModal(kitten) {
