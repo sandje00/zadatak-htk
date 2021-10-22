@@ -24,11 +24,11 @@ const carouselController = new CarouselController(kittens.getTopN(4, 'age'));
 
 loadCarousel(carouselController.getCurrentItem());
 
-let arrows = document.querySelectorAll('.kitten-carousel-icon');
+let arrows = document.querySelectorAll('.kitten-carousel-button');
 arrows.forEach(arrow => arrow.addEventListener('click', e => onArrowClick(e)));
 
 function onArrowClick(e) {
-    const arrow = e.target;
+    const arrow = e.target.closest('.kitten-carousel-button');
     if (arrow.classList.contains('right'))
         loadCarousel(carouselController.moveRight());
     if (arrow.classList.contains('left'))
