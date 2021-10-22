@@ -99,22 +99,25 @@ function renderVisibleKittens(visibleKittens) {
     if (searchList.hasChildNodes()) searchList.innerHTML = '';
     visibleKittens.forEach(kitten => {
         let el = createKittenCard(kitten);
-        searchList.innerHTML += el;
+        searchList.appendChild(el);
     });
 }
 
 function createKittenCard(kitten) {
     let id = kittens.entries.indexOf(kitten);
-    return `
-        <div id="kitten-${id}" class="kitten-search-card">
-            <img src="${kitten.image}" alt="${kitten.name}" class="image">
-            <div class="container">
-                <h4>${kitten.name}</h4>
-                <span>Starost: ${kitten.age}</span>
-                <span>Boja: ${kitten.color}</span>
-            </div>
+    let kittenCard = document.createElement('div');
+    kittenCard.id = `kitten-${id}`;
+    kittenCard.classList.add('kitten-search-card');
+    kittenCard.addEventListener('click', e => onCardClick(e));
+    kittenCard.innerHTML = `
+        <img src="${kitten.image}" alt="${kitten.name}" class="image">
+        <div class="container">
+            <h4>${kitten.name}</h4>
+            <span>Starost: ${kitten.age}</span>
+            <span>Boja: ${kitten.color}</span>
         </div>
     `;
+    return kittenCard;
 }
 
 function removeKittenCard(id) {
@@ -128,9 +131,9 @@ function removeKittenCard(id) {
 let modal = document.getElementById('kitten-modal');
 let modalContent = modal.querySelectorAll('.modal-content')[0];
 
-let kittenCards = document.querySelectorAll('.kitten-search-card');
+/* let kittenCards = document.querySelectorAll('.kitten-search-card');
 kittenCards.forEach(card => card.addEventListener('click', e => onCardClick(e)));
-
+ */
 let closeButton = document.querySelectorAll('.modal-close')[0];
 closeButton.addEventListener('click', onCloseButtonClick);
 
@@ -151,7 +154,7 @@ function onCloseButtonClick() {
 function onAdoptButtonClick() {
     let className = modal.classList[1];
     let id = parseInt(className.slice(-1));
-    let result = confirm(`Jeste li sigurni da zelite udomiti macica po imenu ${kittens.entries[id].name}`)
+    let result = confirm(`Jeste li sigurni da zelite udomiti macica po imenu ${kittens.entries[id].name}?`);
     if (result) {
         removeKittenCard(id);
         closeModal(className);
