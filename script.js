@@ -125,46 +125,32 @@ function removeKittenCard(id) {
     kittenCard.remove();
 }
 
-
-/* Modal logic */
-
-let modal = document.getElementById('kitten-modal');
-let modalContent = modal.querySelectorAll('.modal-content')[0];
-
-
-let closeButton = modal.querySelectorAll('.modal-close')[0];
-closeButton.addEventListener('click', onCloseButtonClick);
-
-let adoptButton = modal.querySelectorAll('.modal-button')[0];
-adoptButton.addEventListener('click', onAdoptButtonClick);
-
-let modalOverlay = modal.querySelectorAll('.modal-overlay')[0];
-modalOverlay.addEventListener('click', onModalOverlayClick);
-
 function onCardClick(e) {
     let kittenCard = e.target.closest('.kitten-search-card');
     let id = parseInt(kittenCard.id.slice(-1));
     showModal({ id, ...kittens.entries[id] });
 }
 
-function onCloseButtonClick() {
-    let className = modal.classList[1];
-    closeModal(className);
+/* Modal logic */
+
+let modal = document.getElementById('kitten-modal');
+let modalContent = modal.querySelectorAll('.modal-content')[0];
+
+let closeModalElements = modal.querySelectorAll('.modal-close');
+closeModalElements.forEach(el => el.addEventListener('click', onCloseModal));
+
+let adoptButton = modal.querySelectorAll('.modal-button')[0];
+adoptButton.addEventListener('click', onAdoptButtonClick);
+
+function onCloseModal() {
+    let id = parseInt(modal.classList[1].slice(-1));
+    closeModal(id);
 }
 
 function onAdoptButtonClick() {
-    let className = modal.classList[1];
-    let id = parseInt(className.slice(-1));
+    let id = parseInt(modal.classList[1].slice(-1));
     let result = confirm(`Jeste li sigurni da zelite udomiti macica po imenu ${kittens.entries[id].name}?`);
-    if (result) {
-        removeKittenCard(id);
-        closeModal(className);
-    }
-}
-
-function onModalOverlayClick() {
-    let className = modal.classList[1];
-    closeModal(className);
+    if (result) adoptKitten(id);
 }
 
 function showModal(kitten) {
@@ -173,9 +159,14 @@ function showModal(kitten) {
     toggleMultipleClasses(modal, `modal-${kitten.id}`, 'display-none');
 }
 
-function closeModal(className) {
+function adoptKitten(id) {
+    removeKittenCard(id);
+    closeModal(id);
+}
+
+function closeModal(id) {
     modalContent.removeChild(modalContent.firstChild);
-    toggleMultipleClasses(modal, className, 'display-none');
+    toggleMultipleClasses(modal, `modal-${id}`, 'display-none');
 }
 
 function createKittenInfoElement(kitten) {
