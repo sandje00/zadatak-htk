@@ -117,24 +117,53 @@ function createKittenCard(kitten) {
     `;
 }
 
+function removeKittenCard(id) {
+    let kittenCard = document.getElementById(`kitten-${id}`);
+    kittenCard.remove();
+}
+
 
 /* Modal logic */
+
+let modal = document.getElementById('kitten-modal');
+let modalContent = modal.querySelectorAll('.modal-content')[0];
 
 let kittenCards = document.querySelectorAll('.kitten-search-card');
 kittenCards.forEach(card => card.addEventListener('click', e => onCardClick(e)));
 
+let closeButton = document.querySelectorAll('.modal-close')[0];
+closeButton.addEventListener('click', onCloseButtonClick);
+
+let adoptButton = document.querySelectorAll('.modal-button')[0];
+adoptButton.addEventListener('click', onAdoptButtonClick);
+
 function onCardClick(e) {
     let kittenCard = e.target.closest('.kitten-search-card');
     let id = parseInt(kittenCard.id.slice(-1));
-    showModal(kittens.entries[id]);
+    showModal({ id, ...kittens.entries[id] });
+}
+
+function onCloseButtonClick() {
+    let className = modal.classList[1];
+    closeModal(className);
+}
+
+function onAdoptButtonClick() {
+    let className = modal.classList[1];
+    let id = className.slice(-1);
+    removeKittenCard(id);
+    closeModal(className);
 }
 
 function showModal(kitten) {
     let kittenInfo = createKittenInfoElement(kitten);
-    let modal = document.getElementById('kitten-modal');
-    let modalContent = modal.querySelectorAll('.modal-content')[0];
     modalContent.insertBefore(kittenInfo, modalContent.firstChild);
-    modal.classList.toggle('display-none');
+    toggleMultipleClasses(modal, `modal-${kitten.id}`, 'display-none');
+}
+
+function closeModal(className) {
+    modalContent.removeChild(modalContent.firstChild);
+    toggleMultipleClasses(modal, className, 'display-none');
 }
 
 function createKittenInfoElement(kitten) {
@@ -149,12 +178,6 @@ function createKittenInfoElement(kitten) {
     return kittenInfoContainer;
 }
 
-let closeButton = document.querySelectorAll('.modal-close')[0];
-closeButton.addEventListener('click', onCloseModal);
-
-function onCloseModal() {
-    let modal = document.getElementById('kitten-modal');
-    let modalContent = modal.querySelectorAll('.modal-content')[0];
-    modalContent.removeChild(modalContent.firstChild);
-    modal.classList.toggle('display-none');
+function toggleMultipleClasses(el, ...classes) {
+    classes.forEach(className => el.classList.toggle(className));
 }
