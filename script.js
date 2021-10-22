@@ -131,14 +131,15 @@ function removeKittenCard(id) {
 let modal = document.getElementById('kitten-modal');
 let modalContent = modal.querySelectorAll('.modal-content')[0];
 
-/* let kittenCards = document.querySelectorAll('.kitten-search-card');
-kittenCards.forEach(card => card.addEventListener('click', e => onCardClick(e)));
- */
-let closeButton = document.querySelectorAll('.modal-close')[0];
+
+let closeButton = modal.querySelectorAll('.modal-close')[0];
 closeButton.addEventListener('click', onCloseButtonClick);
 
-let adoptButton = document.querySelectorAll('.modal-button')[0];
+let adoptButton = modal.querySelectorAll('.modal-button')[0];
 adoptButton.addEventListener('click', onAdoptButtonClick);
+
+let modalOverlay = modal.querySelectorAll('.modal-overlay')[0];
+modalOverlay.addEventListener('click', onModalOverlayClick);
 
 function onCardClick(e) {
     let kittenCard = e.target.closest('.kitten-search-card');
@@ -159,6 +160,11 @@ function onAdoptButtonClick() {
         removeKittenCard(id);
         closeModal(className);
     }
+}
+
+function onModalOverlayClick() {
+    let className = modal.classList[1];
+    closeModal(className);
 }
 
 function showModal(kitten) {
