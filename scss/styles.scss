@@ -143,6 +143,14 @@ button {
     }
 }
 
+.button-accent {
+    background-color: $accent;
+    color: $white;
+    padding: 0.5rem 2rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
 .display-none {
     display: none;
 }
@@ -178,14 +186,6 @@ button {
         box-shadow: 0 1px 5px rgba(0,0,0,0.7);
         border-radius: 4px;
         width: 520px;
-    }
-
-    &-button {
-        background-color: $accent;
-        color: $white;
-        padding: 0.5rem 2rem;
-        border-radius: 8px;
-        cursor: pointer;
     }
 
     &-close-button {

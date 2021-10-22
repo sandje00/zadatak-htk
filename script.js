@@ -76,6 +76,9 @@ radioSortOrder.forEach(radio => {
 
 let checkboxFilter = document.querySelectorAll('input[type=checkbox]');
 checkboxFilter.forEach(filter => filter.addEventListener('change', e => onFilterValueChange(e)));
+
+let showMoreButton = document.getElementById('show-more');
+showMoreButton.addEventListener('click', e => onShowMore(e));
     
 function onSortByValueChange(e) {
     currentSortBy = e.target.value;
@@ -92,6 +95,11 @@ function onFilterValueChange(e) {
         renderVisibleKittens(kittens.filterByKey(e.target.name, e.target.value));
     else
         renderVisibleKittens(kittens.removeFilter());
+}
+
+function onShowMore(e) {
+    e.target.classList.toggle('display-none');
+    renderVisibleKittens(kittens.visibleEntries);
 }
 
 function renderVisibleKittens(visibleKittens) {
