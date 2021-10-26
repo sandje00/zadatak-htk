@@ -78,27 +78,28 @@ let checkboxFilter = document.querySelectorAll('input[type=checkbox]');
 checkboxFilter.forEach(filter => filter.addEventListener('change', e => onFilterValueChange(e)));
 
 let showMoreButton = document.getElementById('show-more');
-showMoreButton.addEventListener('click', e => onShowMore(e));
+showMoreButton.addEventListener('click', onShowMore);
     
 function onSortByValueChange(e) {
     currentSortBy = e.target.value;
     renderVisibleKittens(kittens.sortByKey(currentSortBy, currentSortOrder));
+    showMoreButton.classList.add('display-none');
 }
     
 function onSortOrderValueChange(e) {
     currentSortOrder = e.target.value;
     renderVisibleKittens(kittens.sortByKey(currentSortBy, currentSortOrder));
+    hideShowMoreButton();
 }
     
 function onFilterValueChange(e) {
-    if (e.target.checked)
-        renderVisibleKittens(kittens.filterByKey(e.target.name, e.target.value));
-    else
-        renderVisibleKittens(kittens.removeFilter());
+    if (e.target.checked) renderVisibleKittens(kittens.filterByKey(e.target.name, e.target.value));
+    else renderVisibleKittens(kittens.removeFilter());
+    hideShowMoreButton();
 }
 
-function onShowMore(e) {
-    e.target.classList.toggle('display-none');
+function onShowMore() {
+    hideShowMoreButton();
     renderVisibleKittens(kittens.visibleEntries);
 }
 
@@ -137,6 +138,10 @@ function onCardClick(e) {
     let kittenCard = e.target.closest('.kitten-search-card');
     let id = parseInt(kittenCard.id.slice(-1));
     showModal({ id, ...kittens.entries[id] });
+}
+
+function hideShowMoreButton() {
+    showMoreButton.classList.add('display-none');
 }
 
 /* Modal logic */
