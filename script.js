@@ -119,7 +119,7 @@ function createKittenCard(kitten) {
     kittenCard.classList.add('kitten-search-card');
     kittenCard.addEventListener('click', e => onCardClick(e));
     kittenCard.innerHTML = `
-        <img src="${kitten.image}" alt="${kitten.name}" class="image">
+        <img src="${kitten.image}" alt="${kitten.name}">
         <div class="container">
             <h4>${kitten.name}</h4>
             <span>Starost: ${kitten.age}</span>
@@ -184,12 +184,13 @@ function closeModal(id) {
 
 function createKittenInfoElement(kitten) {
     let kittenInfo = `
+        <img src="${kitten.image}" alt="${kitten.name}">
         <h4>${kitten.name}</h4>
         <span>Starost: ${kitten.age}</span>
         <span>Boja: ${kitten.color}</span>
     `;
     let kittenInfoContainer = document.createElement('div');
-    kittenInfoContainer.classList.add('container');
+    kittenInfoContainer.classList.add('kitten-info');
     kittenInfoContainer.innerHTML = kittenInfo;
     return kittenInfoContainer;
 }

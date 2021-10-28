@@ -102,6 +102,8 @@ button {
     }
 
     &-content {
+        display: flex;
+        flex-direction: column;
         z-index: 999;
         position: absolute;
         top: 50%;
@@ -114,7 +116,13 @@ button {
         padding: 20px;
         box-shadow: 0 1px 5px rgba(0,0,0,0.7);
         border-radius: 4px;
-        width: 520px;
+        width: 25rem;
+    }
+
+    &-button {
+        margin-top: 2rem;
+        margin-bottom: 0.5rem;
+        align-self: center;
     }
 
     &-close-button {
@@ -286,6 +294,7 @@ button {
             width: 20rem;
             margin-top: 2.5rem;
             margin-right: 2rem;
+            overflow: hidden;
 
             &:hover {
                 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
@@ -297,8 +306,10 @@ button {
             align-self: center;
         }
 
-        .image {
+        img {
             width: 100%;
+            height: 200px;
+            object-fit: cover;
             border-radius: 5px 5px 0 0;
         }
 
@@ -306,16 +317,41 @@ button {
             display: flex;
             flex-direction: column;
             align-items: left;
-            padding: 0.125rem 1rem;
+            padding: 1rem;
             color: $black;
 
             h4 {
+                font-size: 1.5rem;
                 font-weight: 700;
             }
 
             span {
                 padding-bottom: 0.5rem;
             }
+        }
+    }
+
+    &-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        span {
+            padding-bottom: 0.5rem;
+            align-self: flex-start;
         }
     }
 }
