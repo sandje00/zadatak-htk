@@ -243,6 +243,32 @@ button {
             }
         }
 
+        &-container {
+            display: flex;
+            align-items: center;
+            align-self: flex-start;
+            margin-top: 1.5rem;
+            padding: 0.5rem 1rem;
+            background-color: $white;
+            border-radius: 20px;
+        }
+
+        &-box {
+            width: 15rem;
+            height: 2rem;
+            border: none;
+
+            &::placeholder {
+                color: $primary;
+                font-size: 1rem;
+            }
+
+            &:focus {
+                outline: none;
+                border-bottom: 1px solid $primary;
+            }
+        }
+
         &-list {
             display: flex;
             justify-content: flex-start;
@@ -264,13 +290,6 @@ button {
             &:hover {
                 box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
             }
-        }
-
-        &-box {
-            width: 15rem;
-            height: 2rem;
-            margin-top: 1.5rem;
-            border: none;
         }
 
         &-button {
