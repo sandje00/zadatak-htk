@@ -35,55 +35,31 @@
                     <div class="choice">
                         <p>Sortiraj po:</p>
                         <div class="choice-group">
-                            <div class="choice-container">
-                                <input
-                                    type="radio"
-                                    name="sort-by"
-                                    value="age"
-                                    id="sort-by-age"
-                                    class="choice-radio">
-                                <label class="choice-label">
-                                    starosti
-                                </label>
-                            </div>
-                            <div class="choice-container">
-                                <input 
-                                    type="radio"
-                                    name="sort-by"
-                                    value="name"
-                                    id="sort-by-name"
-                                    class="choice-radio">
-                                <label class="choice-label">
-                                    imenu
-                                </label>
-                            </div>
+                            <label class="choice-label">
+                                <input type="radio" name="sort-by" value="age" id="sort-by-age">
+                                <span class="checkmark radio"></span>
+                                starosti
+                            </label>
+                            <label class="choice-label">
+                                <input type="radio" name="sort-by" value="name" id="sort-by-name">
+                                <span class="checkmark radio"></span>
+                                imenu
+                            </label>
                         </div>
                     </div>
                     <div class="choice">
                         <p>Sortiraj u smjeru:</p>
                         <div class="choice-group">
-                            <div class="choice-container">
-                                <input
-                                    type="radio"
-                                    name="sort-order"
-                                    value="asc"
-                                    id="sort-asc"
-                                    class="choice-radio">
-                                <label class="choice-label">
-                                    asc
-                                </label>
-                            </div>
-                            <div class="choice-container">
-                                <input
-                                    type="radio"
-                                    name="sort-order"
-                                    value="desc"
-                                    id="sort-desc"
-                                    class="choice-radio">
-                                <label class="choice-label">
-                                    desc
-                                </label>
-                            </div>
+                            <label class="choice-label">
+                                <input type="radio" name="sort-order" value="asc" id="sort-asc">
+                                <span class="checkmark radio"></span>
+                                asc
+                            </label>
+                            <label class="choice-label">
+                                <input type="radio" name="sort-order" value="desc" id="sort-desc">
+                                <span class="checkmark radio"></span>
+                                desc
+                            </label>
                         </div>
                     </div>
                 </div>
@@ -91,19 +67,19 @@
                     <p>Filtriraj:</p>
                     <div class="choice-group">
                         <label class="choice-label">
-                            Mačić je mlađi od 12 mjeseci
                             <input type="checkbox" name="age" value="12">
-                            <span class="choice-checkbox"></span>
+                            <span class="checkmark checkbox"></span>
+                            Mačić je mlađi od 12 mjeseci
                         </label>
                         <label class="choice-label">
-                            Mačić je mlađi od 6 mjeseci
                             <input type="checkbox" name="age" value="6">
-                            <span class="choice-checkbox"></span>
+                            <span class="checkmark checkbox"></span>
+                            Mačić je mlađi od 6 mjeseci
                         </label>
                         <label class="choice-label">
-                            Boja mačića je crna
                             <input type="checkbox" name="color" value="crna">
-                            <span class="choice-checkbox"></span>
+                            <span class="checkmark checkbox"></span>
+                            Boja mačića je crna
                         </label>
                     </div>
                 </div>
