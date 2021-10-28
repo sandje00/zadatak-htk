@@ -34,6 +34,10 @@ button {
     cursor: pointer;
 }
 
+input[type=checkbox] {
+    visibility: hidden;
+}
+
 .display-none {
     display: none;
 }
@@ -168,7 +172,7 @@ button {
                     flex-direction: row;
                 }
 
-                &-container {
+                &-label {
                     margin-right: 2rem;
                 }
             }
