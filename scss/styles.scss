@@ -296,8 +296,9 @@ button {
         }
 
         &-button {
-            margin-bottom: 2rem;
-            align-self: center;
+            margin-top: 2rem;
+            position: absolute;
+            left: 40%;
         }
 
         img {
