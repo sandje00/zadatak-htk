@@ -24,9 +24,7 @@ body {
 }
 
 main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    position: relative;
 }
 
 button {
@@ -154,10 +152,8 @@ button {
     }
 
     &-search {
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
+        position: absolute;
+        left: 20%;
 
         &-control {
             display: flex;
@@ -279,10 +275,8 @@ button {
 
         &-list {
             display: flex;
-            justify-content: flex-start;
             flex-wrap: wrap;
-            width: 88rem;
-            margin-bottom: 3rem;
+            max-width: 88rem;
         }
 
         &-card {
