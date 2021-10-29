@@ -54,6 +54,7 @@ searchBox.addEventListener('keyup', e => onSearch(e));
 function onSearch(e) {
     let keyword = e.target.value.toUpperCase();
     renderVisibleKittens(kittens.searchByKey('name', keyword));
+    hideShowMoreButton();
 }
 
 const NUMBER_OF_ENTRIES = 4;
