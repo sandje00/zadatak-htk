@@ -1,0 +1,39 @@
+.kitten-search-card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    border-radius: 5px;
+    background-color: $white;
+    cursor: pointer;
+    width: 20rem;
+    margin-top: 2.5rem;
+    margin-right: 2rem;
+    overflow: hidden;
+
+    &:hover {
+        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    }
+
+    img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        padding: 1rem;
+        color: $black;
+
+        h4 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        span {
+            padding-bottom: 0.5rem;
+        }
+    }
+}

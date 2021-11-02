@@ -1,0 +1,14 @@
+.choice {
+    margin-top: 1.5rem;
+    margin-right: 3rem;
+    font-size: 1.3rem;
+
+    &-sort {
+        display: flex;
+    }
+
+    &-group {
+        display: flex;
+        flex-direction: row;
+    }
+}

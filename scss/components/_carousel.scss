@@ -1,0 +1,15 @@
+.kitten {
+    &-carousel {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &-button {
+            font-size: 3rem;
+        }
+
+        &-icon {
+            font-size: inherit !important;
+        }
+    }
+}
