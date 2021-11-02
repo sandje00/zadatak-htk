@@ -1,4 +1,5 @@
 import Carousel from './js/carousel.js';
+import KittenModal from './js/kittenModal.js';
 import Kittens from './js/kittens.js';
 
 /* Fetch data */
@@ -22,9 +23,10 @@ const carousel = new Carousel(
     document.getElementById('kitten-carousel'),
     'kitten'
 );
-
 carousel.init();
 
+const kittenModal = new KittenModal(document.getElementById('kitten-modal-0'));
+kittenModal.init();
 
 /* Search dashboard logic */
 
@@ -110,72 +112,12 @@ function createKittenCard(kitten) {
     return kittenCard;
 }
 
-function removeKittenCard(id) {
-    let kittenCard = document.getElementById(`kitten-${id}`);
-    kittenCard.remove();
-}
-
 function onCardClick(e) {
     let kittenCard = e.target.closest('.kitten-search-card');
     let id = parseInt(kittenCard.id.slice(-1));
-    showModal({ id, ...kittens.entries[id] });
+    kittenModal.showModal({ id, ...kittens.entries[id] }, kittenCard);
 }
 
 function hideShowMoreButton() {
     showMoreButton.classList.add('display-none');
-}
-
-/* Modal logic */
-
-let modal = document.getElementById('kitten-modal');
-let modalContent = modal.querySelectorAll('.modal-content')[0];
-
-let closeModalElements = modal.querySelectorAll('.modal-close');
-closeModalElements.forEach(el => el.addEventListener('click', onCloseModal));
-
-let adoptButton = modal.querySelectorAll('.modal-button')[0];
-adoptButton.addEventListener('click', onAdoptButtonClick);
-
-function onCloseModal() {
-    let id = parseInt(modal.classList[1].slice(-1));
-    closeModal(id);
-}
-
-function onAdoptButtonClick() {
-    let id = parseInt(modal.classList[1].slice(-1));
-    let result = confirm(`Jeste li sigurni da zelite udomiti macica po imenu ${kittens.entries[id].name}?`);
-    if (result) adoptKitten(id);
-}
-
-function showModal(kitten) {
-    let kittenInfo = createKittenInfoElement(kitten);
-    modalContent.insertBefore(kittenInfo, modalContent.firstChild);
-    toggleMultipleClasses(modal, `modal-${kitten.id}`, 'display-none');
-}
-
-function adoptKitten(id) {
-    removeKittenCard(id);
-    closeModal(id);
-}
-
-function closeModal(id) {
-    modalContent.removeChild(modalContent.firstChild);
-    toggleMultipleClasses(modal, `modal-${id}`, 'display-none');
-}
-
-function createKittenInfoElement(kitten) {
-    let kittenInfo = `
-        <img src="${kitten.image}" alt="${kitten.name}">
-        <h4>${kitten.name}</h4>
-        <span>Starost: ${kitten.age}</span>
-        <span>Boja: ${kitten.color}</span>
-    `;
-    let kittenInfoContainer = document.createElement('div');
-    kittenInfoContainer.classList.add('kitten-info');
-    kittenInfoContainer.innerHTML = kittenInfo;
-    return kittenInfoContainer;
-}
-
-function toggleMultipleClasses(el, ...classes) {
-    classes.forEach(className => el.classList.toggle(className));
 }
