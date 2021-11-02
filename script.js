@@ -1,4 +1,4 @@
-import CarouselController from './js/carouselController.js';
+import Carousel from './js/carousel.js';
 import Kittens from './js/kittens.js';
 
 /* Fetch data */
@@ -17,33 +17,13 @@ main();
 
 const kittens = new Kittens(JSON.parse(localStorage.getItem('kittens')));
 
+const carousel = new Carousel(
+    kittens.getTopN(4, 'age'),
+    document.getElementById('kitten-carousel'),
+    'kitten'
+);
 
-/* Carousel logic */
-
-const carouselController = new CarouselController(kittens.getTopN(4, 'age'));
-
-loadCarousel(carouselController.getCurrentItem());
-
-let arrows = document.querySelectorAll('.kitten-carousel-button');
-arrows.forEach(arrow => arrow.addEventListener('click', e => onArrowClick(e)));
-
-function onArrowClick(e) {
-    const arrow = e.target.closest('.kitten-carousel-button');
-    if (arrow.classList.contains('right'))
-        loadCarousel(carouselController.moveRight());
-    if (arrow.classList.contains('left'))
-        loadCarousel(carouselController.moveLeft());
-}
-
-function loadCarousel(currentItem) {
-    let carouselSlide = document.getElementById('slide');
-    carouselSlide.innerHTML = '';
-    carouselSlide.innerHTML += createCarouselSlide(currentItem);
-}
-
-function createCarouselSlide(item) {
-    return `<img src=${item.image} alt=${item.alt}>`;
-}
+carousel.init();
 
 
 /* Search dashboard logic */
