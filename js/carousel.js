@@ -15,7 +15,6 @@ class Carousel {
 
     _loadCarousel() {
         const slides = this.element.querySelectorAll('.carousel-slide');
-        console.log(this.previous, this.current, this.next);
         slides.forEach(slide => {
             slide.innerHTML = '';
             if (slide.classList.contains('left'))
