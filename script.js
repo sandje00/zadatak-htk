@@ -20,8 +20,7 @@ const kittens = new Kittens(JSON.parse(localStorage.getItem('kittens')));
 
 const carousel = new Carousel(
     kittens.getTopN(4, 'age'),
-    document.getElementById('kitten-carousel'),
-    'kitten'
+    document.getElementById('kitten-carousel')
 );
 carousel.init();
 

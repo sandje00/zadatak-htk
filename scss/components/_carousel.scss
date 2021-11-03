@@ -1,15 +1,35 @@
-.kitten {
-    &-carousel {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+.carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
 
-        &-button {
-            font-size: 3rem;
-        }
+    &-button {
+        font-size: 3rem;
+        z-index: 10;
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        transform: translate(-50%, -50%);
+    }
 
+    &-content {
+        position: relative;
+        height: 400px;
+    
         &-icon {
             font-size: inherit !important;
+        }
+
+        img {
+            height: 400px;
+            opacity: 0.2;
+        }
+
+        .active {
+            img {
+                opacity: 1;
+            }
         }
     }
 }

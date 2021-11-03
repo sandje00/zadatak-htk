@@ -1,48 +1,57 @@
 class Carousel {
-    constructor(items, element, className) {
+    constructor(items, element) {
         this.items = items;
         this.element = element;
-        this.className = className;
-        this.slide = element.querySelector(`#${this.className}-carousel-slide`);
-        this.arrows = element.querySelectorAll(`.${this.className}-carousel-button`);
-        this.counter = 0;
+        this.arrows = element.querySelectorAll('.carousel-button');
+        this.current = 0;
+        this.previous = this.items.length - 1;
+        this.next = this.current + 1;
     }
 
     init() {
-        this._loadCarousel(this._getCurrentItem());
+        this._loadCarousel();
         this.arrows.forEach(arrow => arrow.addEventListener('click', e => this._onArrowClick(e)));
     }
 
-    _loadCarousel(current) {
-        this.slide.innerHTML = '';
-        this.slide.innerHTML += this._createCarouselSlide(current);
+    _loadCarousel() {
+        const slides = this.element.querySelectorAll('.carousel-slide');
+        console.log(this.previous, this.current, this.next);
+        slides.forEach(slide => {
+            slide.innerHTML = '';
+            if (slide.classList.contains('left'))
+                slide.appendChild(this._createSlideContent(this.items[this.previous]));
+            if (slide.classList.contains('active'))
+                slide.appendChild(this._createSlideContent(this.items[this.current]));
+            if (slide.classList.contains('left'))
+                slide.appendChild(this._createSlideContent(this.items[this.next]));
+        });
     }
 
     _onArrowClick(e) {
-        const arrow = e.target.closest(`.${this.className}-carousel-button`);
-        if (arrow.classList.contains('right'))
-            this._loadCarousel(this._moveRight());
-        if (arrow.classList.contains('left'))
-            this._loadCarousel(this._moveLeft());
+        const arrow = e.target.closest('.carousel-button');
+        if (arrow.classList.contains('right')) this._moveRight();
+        if (arrow.classList.contains('left')) this._moveLeft();
     }
 
-    _createCarouselSlide(item) {
-        return `<img src=${item.image} alt=${item.alt}>`;
+    _createSlideContent(item) {
+        const slideContent = document.createElement('img');
+        slideContent.src = item.image;
+        slideContent.alt = item.name;
+        return slideContent;
     }
-
-    _getCurrentItem() {
-        return this.items[this.counter];
-    }
-
 
     _moveRight() {
-        this.counter = this.counter === this.items.length - 1 ? 0 : this.counter + 1;
-        return this._getCurrentItem();
+        this.previous = this.current;
+        this.current = this.next
+        this.next = this.next === this.items.length - 1 ? 0 : this.next + 1;
+        this._loadCarousel();
     }
 
     _moveLeft() {
-        this.counter = this.counter === 0 ? this.items.length - 1 : this.counter - 1;
-        return this._getCurrentItem();
+        this.next = this.current;
+        this.current = this.previous
+        this.previous = this.previous === 0 ? this.items.length - 1 : this.previous - 1;
+        this._loadCarousel();
     }
 }
 
