@@ -17,11 +17,11 @@ class Carousel {
         const slides = this.element.querySelectorAll('.carousel-slide');
         slides.forEach(slide => {
             slide.innerHTML = '';
-            if (slide.classList.contains('left'))
+            if (slide.classList.contains('left-side'))
                 slide.appendChild(this._createSlideContent(this.items[this.previous]));
             if (slide.classList.contains('active'))
                 slide.appendChild(this._createSlideContent(this.items[this.current]));
-            if (slide.classList.contains('left'))
+            if (slide.classList.contains('right-side'))
                 slide.appendChild(this._createSlideContent(this.items[this.next]));
         });
     }

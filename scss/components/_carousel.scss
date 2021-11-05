@@ -4,25 +4,14 @@
     align-items: center;
     margin-top: 5rem;
 
-    &-button {
-        font-size: 3rem;
-        z-index: 10;
-        position: absolute;
-        top: 50%;
-        right: 50%;
-        transform: translate(-50%, -50%);
-    }
-
     &-content {
         position: relative;
         height: 400px;
-    
-        &-icon {
-            font-size: inherit !important;
-        }
 
         img {
+            width: 400px;
             height: 400px;
+            object-fit: cover;
             opacity: 0.2;
         }
 
@@ -31,5 +20,27 @@
                 opacity: 1;
             }
         }
+    }
+
+    &-button {
+        font-size: 3rem;
+        z-index: 10;
+        position: absolute;
+        top: 50%;
+        right: 50%;
+        transform: translate(-50%, -50%);
+
+        /* .left {
+            right: 10%;
+        }
+
+        .right {
+            left: 20%;
+        } */
+    }
+
+    &-icon {
+        font-size: inherit !important;
+        color: $primary-dark;
     }
 }
