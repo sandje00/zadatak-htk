@@ -18,6 +18,12 @@
         .active {
             img {
                 opacity: 1;
+                transition: transform .2s ease;
+
+                &:hover {
+                    cursor: pointer;
+                    transform: scale(1.2);
+                }
             }
         }
     }
