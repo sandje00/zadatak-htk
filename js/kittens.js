@@ -1,3 +1,10 @@
+import { 
+    alphabeticSort,
+    numericSort,
+    filterByKeyword,
+    filterEqual,
+    filterLessEqual
+ } from './utils/objectArray.js';
 class Kittens {
     constructor(entries) {
         this.entries = entries;
@@ -19,10 +26,7 @@ class Kittens {
     }
     
     searchByKey(key, keyword) {
-        return this.visibleEntries.filter(it => it[key]
-            .toString()
-            .toUpperCase()
-            .includes(keyword));
+        return filterByKeyword(this.visibleEntries, key, keyword);
     }
 
     getTopN(n, key) {
@@ -36,27 +40,19 @@ class Kittens {
     }
     
     _sortByAge(isAscending) {
-        return this.entries.slice().sort((a, b) => {
-            return isAscending ? a.age - b.age : b.age - a.age;
-        });
+        return numericSort(this.entries, 'age', isAscending);
     }
 
     _sortByName(isAscending) {
-        return this.entries.slice().sort((a, b) => {
-            let nameA = a.name.toUpperCase();
-            let nameB = b.name.toUpperCase();
-            if (nameA < nameB) return isAscending ? -1 : 1;
-            if (nameA > nameB) return isAscending ? 1 : -1;
-            return 0;
-        });
+        return alphabeticSort(this.entries, 'name', isAscending);
     }
 
     _filterByAge(value) {
-        return this.visibleEntries.filter(it => it.age <= value);
+        return filterLessEqual(this.visibleEntries, 'age', value);
     }
 
     _filterByColor(value) {
-        return this.visibleEntries.filter(it => it.color === value);
+        return filterEqual(this.visibleEntries, 'color', value);
     }
     
 }
