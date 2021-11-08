@@ -8,6 +8,7 @@ class Carousel {
         this.current = 0;
         this.previous = this.items.length - 1;
         this.next = this.current + 1;
+        this.slideShowTimeout = null;
     }
 
     init() {
@@ -17,7 +18,7 @@ class Carousel {
 
     _loadCarousel() {
         this.slides.forEach(slide => this._loadSlide(slide));
-        if (this.animate) setTimeout(() => this._moveRight(), 5000);
+        if (this.animate) this.slideShowTimeout = this._slideShow();
     }
 
     _loadSlide(slide) {
@@ -31,7 +32,7 @@ class Carousel {
     }
 
     _onArrowClick(e) {
-        this.animate = false;
+        this._stopSlideShow();
         const arrow = e.target.closest('.carousel-button');
         if (arrow.classList.contains('right')) this._moveRight();
         if (arrow.classList.contains('left')) this._moveLeft();
@@ -57,6 +58,20 @@ class Carousel {
         this.current = this.previous
         this.previous = this.previous === 0 ? this.items.length - 1 : this.previous - 1;
         this._loadCarousel();
+    }
+
+    _onMouseOver() {
+        this._stopSlideShow();
+    }
+
+    _slideShow() {
+        return setTimeout(() => this._moveRight(), 5000);
+    }
+
+    _stopSlideShow() {
+        this.animate = false;
+        clearTimeout(this.slideShowTimeout);
+        this.slideShowTimeout = null;
     }
 }
 
