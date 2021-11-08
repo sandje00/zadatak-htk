@@ -1,4 +1,4 @@
-import { toggleMultipleClasses } from './utils/dom.js';
+import { toggleMultipleClasses } from '../utils/dom.js';
 
 class Modal {
     constructor(element) {

@@ -1,4 +1,4 @@
-import Modal from './modal.js';
+import Modal from './base/modal.js';
 
 class KittenModal extends Modal {
     constructor(element) {
