@@ -15,6 +15,10 @@ class Modal {
         }));
     }
 
+    showModal() {
+        this.element.classList.toggle('display-none');
+    }
+
     _closeModal(id) {
         this.content.removeChild(this.content.firstChild);
         toggleMultipleClasses(this.element, `modal-${id}`, 'display-none');
