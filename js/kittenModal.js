@@ -1,5 +1,4 @@
 import Modal from './modal.js';
-import { toggleMultipleClasses } from './utils.js';
 
 class KittenModal extends Modal {
     constructor(element) {
