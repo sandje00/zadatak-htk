@@ -4,14 +4,14 @@
     'base/base';
 
 @import
+    'layout/layout';
+
+@import
     'components/logo',
     'components/modal',
     'components/carousel',
-    'components/choice-label',
+    'components/choice',
     'components/card',
     'components/searchbox',
     'components/search-dashboard',
     'components/info';
-
-@import
-    'layout/choice';

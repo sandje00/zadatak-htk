@@ -17,8 +17,6 @@
     }
 
     &-content {
-        display: flex;
-        flex-direction: column;
         z-index: 999;
         position: absolute;
         top: 50%;
@@ -37,7 +35,6 @@
     &-button {
         margin-top: 2rem;
         margin-bottom: 0.5rem;
-        align-self: center;
     }
 
     &-close-button {

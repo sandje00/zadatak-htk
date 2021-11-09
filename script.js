@@ -103,7 +103,7 @@ function createKittenCard(kitten) {
     kittenCard.addEventListener('click', e => onCardClick(e));
     kittenCard.innerHTML = `
         <img src="${kitten.image}" alt="${kitten.name}">
-        <div class="container">
+        <div class="container flex-v align-left">
             <h4>${kitten.name}</h4>
             <span>Starost: ${kitten.age}</span>
             <span>Boja: ${kitten.color}</span>

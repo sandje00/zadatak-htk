@@ -8,12 +8,12 @@
     <title>Udomi Me</title>
 </head>
 <body>
-    <div class="logo">
+    <div class="logo flex-h">
         <span class="logo-name logo-shadow">Udomi Me</span>
         <span class="logo-icon logo-shadow material-icons">pets</span>
     </div>
     <main>
-        <div id="kitten-carousel" class="carousel">
+        <div id="kitten-carousel" class="carousel flex-h justify-center align-center">
             <div class="carousel-content">
                 <div class="carousel-slide left-side"></div>
                 <button class="icon-button carousel-button left">
@@ -35,7 +35,7 @@
             </div>
         </div>
         <div class="kitten-search">
-            <div class="kitten-search-control">
+            <div class="flex-v">
                 <div class="choice-sort">
                     <div class="choice">
                         <p>Sortiraj po:</p>
@@ -88,21 +88,21 @@
                         </label>
                     </div>
                 </div>
-                <div class="kitten-search-container">
+                <div class="kitten-search-container flex-h align-center align-self-start">
                     <span class="material-icons">
                         search
                     </span>
                     <input type="text" placeholder="Search" id="kitten-search-box" class="kitten-search-box">
                 </div>
             </div>
-            <div id="kitten-search-list" class ="kitten-search-list"></div>
+            <div id="kitten-search-list" class ="kitten-search-list flex-h wrap"></div>
             <button id="show-more" class="kitten-search-button button-accent">
                 Prikaži više
             </button>
             <div id="kitten-modal-0" class="modal display-none">
                 <div class="modal-overlay modal-close"></div>
-                <div class="modal-content">
-                    <button class="modal-button button-accent">
+                <div class="modal-content flex-v">
+                    <button class="modal-button button-accent align-self-center">
                         Udomi
                     </button>
                     <button class="icon-button modal-close-button modal-close">

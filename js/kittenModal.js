@@ -38,7 +38,7 @@ class KittenModal extends Modal {
             <span>Boja: ${this.kitten.color}</span>
         `;
         let kittenInfoContainer = document.createElement('div');
-        kittenInfoContainer.classList.add('kitten-info');
+        kittenInfoContainer.classList.add('kitten-info', 'flex-v', 'justify-center', 'align-center');
         kittenInfoContainer.innerHTML = kittenInfo;
         return kittenInfoContainer;
     }
