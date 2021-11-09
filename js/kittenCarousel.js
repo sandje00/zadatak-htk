@@ -32,7 +32,7 @@ class KittenCarousel extends Carousel{
         slideContent.src = item.image;
         slideContent.alt = item.name;
         slideContent.onmouseover = isActive ? () => this._onMouseOver() : null;
-        slideContent.onclick = this.action;
+        slideContent.onclick =  isActive ? () => this.action(item) : null;
         return slideContent;
     }
 }

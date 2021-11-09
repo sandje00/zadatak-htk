@@ -96,9 +96,8 @@ function renderVisibleKittens(visibleKittens) {
 }
 
 function createKittenCard(kitten) {
-    let id = kittens.entries.indexOf(kitten);
     let kittenCard = document.createElement('div');
-    kittenCard.id = `kitten-${id}`;
+    kittenCard.id = `kitten-${kitten.id}`;
     kittenCard.classList.add('kitten-search-card');
     kittenCard.addEventListener('click', e => onCardClick(e));
     kittenCard.innerHTML = `
@@ -115,7 +114,7 @@ function createKittenCard(kitten) {
 function onCardClick(e) {
     let kittenCard = e.target.closest('.kitten-search-card');
     let id = parseInt(kittenCard.id.slice(-1));
-    kittenModal.showModal({ id, ...kittens.entries[id] });
+    kittenModal.showModal(kittens.entries[id]);
 }
 
 function hideShowMoreButton() {

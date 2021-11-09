@@ -1,35 +1,41 @@
 [
     {
+        "id": 0,
         "name": "Djuro",
         "color": "siva",
         "age": 2,
         "image": "/images/djuro.jpg"
     },
     {
+        "id": 1,
         "name": "Mili",
         "color": "siva",
         "age": 5,
         "image": "/images/mili.jpeg"
     },
     {
+        "id": 2,
         "name": "Vanili",
         "color": "bijela",
         "age": 6,
         "image": "/images/vanili.jpg"
     },
     {
+        "id": 3,
         "name": "Nemo",
         "color": "zuta",
         "age": 3,
         "image": "/images/nemo.jpg"
     },
     {
+        "id": 4,
         "name": "Mimi",
         "color": "crna",
         "age": 4,
         "image": "/images/mimi.jpeg"
     },
     {
+        "id": 5,
         "name": "Maks",
         "color": "siva",
         "age": 3,
