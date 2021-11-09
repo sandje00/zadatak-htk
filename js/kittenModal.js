@@ -16,9 +16,9 @@ class KittenModal extends Modal {
         });
     }
     
-    showModal(kitten, card) {
+    showModal(kitten) {
         this.kitten = kitten;
-        this.card = card;
+        this.card = document.getElementById(`kitten-${kitten.id}`);
         let kittenInfo = this._createKittenInfoElement();
         this.content.insertBefore(kittenInfo, this.content.firstChild);
         this.element.classList.toggle(`modal-${this.kitten.id}`);

@@ -18,14 +18,15 @@ main();
 
 const kittens = new Kittens(JSON.parse(localStorage.getItem('kittens')));
 
+const kittenModal = new KittenModal(document.getElementById('kitten-modal-0'));
+kittenModal.init();
+
 const carouselItems = kittens.getTopN(4, 'age');
 const carouselElement = document.getElementById('kitten-carousel');
 const isCarouselAnimated = true;
-const carousel = new KittenCarousel(carouselItems, carouselElement, isCarouselAnimated);
+const carouselAction = kitten => kittenModal.showModal(kitten);
+const carousel = new KittenCarousel(carouselItems, carouselElement, isCarouselAnimated, carouselAction);
 carousel.init();
-
-const kittenModal = new KittenModal(document.getElementById('kitten-modal-0'));
-kittenModal.init();
 
 /* Search dashboard logic */
 
@@ -114,7 +115,7 @@ function createKittenCard(kitten) {
 function onCardClick(e) {
     let kittenCard = e.target.closest('.kitten-search-card');
     let id = parseInt(kittenCard.id.slice(-1));
-    kittenModal.showModal({ id, ...kittens.entries[id] }, kittenCard);
+    kittenModal.showModal({ id, ...kittens.entries[id] });
 }
 
 function hideShowMoreButton() {

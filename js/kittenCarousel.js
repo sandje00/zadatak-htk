@@ -1,9 +1,10 @@
 import Carousel from './base/carousel.js';
 
 class KittenCarousel extends Carousel{
-    constructor(items, element, animate) {
+    constructor(items, element, animate, action) {
         super(items, element, animate);
-        this.slides = element.querySelectorAll('.carousel-slide');
+        this.action = action;
+        this.slides = this.element.querySelectorAll('.carousel-slide');
     }
 
     init() {
@@ -31,6 +32,7 @@ class KittenCarousel extends Carousel{
         slideContent.src = item.image;
         slideContent.alt = item.name;
         slideContent.onmouseover = isActive ? () => this._onMouseOver() : null;
+        slideContent.onclick = this.action;
         return slideContent;
     }
 }

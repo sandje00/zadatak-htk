@@ -4,8 +4,8 @@ class Modal {
     constructor(element) {
         this.element = element;
         this.offset = parseInt(this.element.id.slice(-1));
-        this.content = element.querySelectorAll('.modal-content')[this.offset];
-        this.closeElements = element.querySelectorAll('.modal-close');
+        this.content = this.element.querySelectorAll('.modal-content')[this.offset];
+        this.closeElements = this.element.querySelectorAll('.modal-close');
     }
 
     init() {
