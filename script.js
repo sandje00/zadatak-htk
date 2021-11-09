@@ -1,3 +1,4 @@
+import { extractNumber } from './js/utils/string.js'
 import KittenCarousel from './js/kittenCarousel.js';
 import KittenModal from './js/kittenModal.js';
 import Kittens from './js/kittens.js';
@@ -113,7 +114,7 @@ function createKittenCard(kitten) {
 
 function onCardClick(e) {
     let kittenCard = e.target.closest('.kitten-search-card');
-    let id = parseInt(kittenCard.id.slice(-1));
+    let id = extractNumber(kittenCard.id);
     kittenModal.showModal(kittens.entries[id]);
 }
 
