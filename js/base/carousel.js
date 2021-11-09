@@ -3,8 +3,7 @@ class Carousel {
         this.items = items;
         this.element = element;
         this.animate = animate;
-        this.slides = element.querySelectorAll('.carousel-slide');
-        this.arrows = element.querySelectorAll('.carousel-button');
+        this.arrows = this.element.querySelectorAll('.carousel-button');
         this.current = 0;
         this.previous = this.items.length - 1;
         this.next = this.current + 1;
@@ -12,12 +11,10 @@ class Carousel {
     }
 
     init() {
-        this._loadCarousel();
         this.arrows.forEach(arrow => arrow.addEventListener('click', e => this._onArrowClick(e)));
     }
 
     _loadCarousel() {
-        this.slides.forEach(slide => this._loadSlide(slide));
         if (this.animate) this.slideShowTimeout = this._slideShow();
     }
 

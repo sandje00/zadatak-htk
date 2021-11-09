@@ -1,4 +1,4 @@
-import Carousel from './js/carousel.js';
+import KittenCarousel from './js/kittenCarousel.js';
 import KittenModal from './js/kittenModal.js';
 import Kittens from './js/kittens.js';
 
@@ -18,11 +18,10 @@ main();
 
 const kittens = new Kittens(JSON.parse(localStorage.getItem('kittens')));
 
-const carousel = new Carousel(
-    kittens.getTopN(4, 'age'),
-    document.getElementById('kitten-carousel'),
-    true
-);
+const carouselItems = kittens.getTopN(4, 'age');
+const carouselElement = document.getElementById('kitten-carousel');
+const isCarouselAnimated = true;
+const carousel = new KittenCarousel(carouselItems, carouselElement, isCarouselAnimated);
 carousel.init();
 
 const kittenModal = new KittenModal(document.getElementById('kitten-modal-0'));
