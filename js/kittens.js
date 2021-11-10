@@ -5,9 +5,11 @@ import {
     filterEqual,
     filterLessEqual
  } from './utils/objectArray.js';
+import KittenCard from './kittenCard.js';
 class Kittens {
-    constructor(entries) {
+    constructor(entries, action) {
         this.entries = entries;
+        this.action = action;
         this.visibleEntries = this.sortByKey('age', 'asc');
         this.previouslyVisibleEntries = [[...this.visibleEntries]];
     }
@@ -32,6 +34,16 @@ class Kittens {
     getTopN(n, key) {
         const sorted = this.sortByKey(key);
         return n <= sorted.length && sorted.slice(0, n);
+    }
+
+    renderVisibleKittens(items) {
+        const kittens = items || this.visibleEntries;
+        const searchList = document.getElementById('kitten-search-list');
+        if (searchList.hasChildNodes()) searchList.innerHTML = '';
+        kittens.forEach(kitten => {
+            let el = new KittenCard(kitten, this.action).renderCard();
+            searchList.appendChild(el);
+        });
     }
     
     removeFilter() {

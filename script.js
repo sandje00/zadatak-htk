@@ -1,5 +1,4 @@
 import { hide } from './js/utils/dom.js';
-import KittenCard from './js/kittenCard.js';
 import KittenCarousel from './js/kittenCarousel.js';
 import KittenModal from './js/kittenModal.js';
 import Kittens from './js/kittens.js';
@@ -16,12 +15,12 @@ async function main() {
 
 main();
 
-const kittens = new Kittens(JSON.parse(localStorage.getItem('kittens')));
-
 const kittenModal = new KittenModal(document.getElementById('kitten-modal-0'));
 kittenModal.init();
 
 const showKittenModal = kitten => kittenModal.showModal(kitten);
+
+const kittens = new Kittens(JSON.parse(localStorage.getItem('kittens')), showKittenModal);
 
 const carouselItems = kittens.getTopN(4, 'age');
 const carouselElement = document.getElementById('kitten-carousel');
@@ -39,8 +38,8 @@ function onSearch(e) {
 }
 
 const NUMBER_OF_ENTRIES = 4;
-let visibleKittensInitial = kittens.getTopN(NUMBER_OF_ENTRIES, 'age');
-renderVisibleKittens(visibleKittensInitial);
+let visibleKittens = kittens.getTopN(NUMBER_OF_ENTRIES, 'age');
+kittens.renderVisibleKittens(visibleKittens);
 
 let radioSortBy = document.querySelectorAll('input[type=radio][name="sort-by"]');
 let currentSortBy = 'age';
@@ -64,32 +63,36 @@ showMoreButton.addEventListener('click', onShowMore);
     
 function onSortByValueChange(e) {
     currentSortBy = e.target.value;
-    renderVisibleKittens(kittens.sortByKey(currentSortBy, currentSortOrder));
+    visibleKittens = kittens.sortByKey(currentSortBy, currentSortOrder);
+    kittens.renderVisibleKittens(visibleKittens);
     showMoreButton.classList.add('display-none');
 }
     
 function onSortOrderValueChange(e) {
     currentSortOrder = e.target.value;
-    renderVisibleKittens(kittens.sortByKey(currentSortBy, currentSortOrder));
+    visibleKittens = kittens.sortByKey(currentSortBy, currentSortOrder);
+    kittens.renderVisibleKittens(visibleKittens);
     hide(showMoreButton);
 }
     
 function onFilterValueChange(e) {
-    if (e.target.checked) renderVisibleKittens(kittens.filterByKey(e.target.name, e.target.value));
-    else renderVisibleKittens(kittens.removeFilter());
+    if (e.target.checked) onTargetChecked(e);
+    else onTargetUnchecked();
     hide(showMoreButton);
 }
 
 function onShowMore() {
     hide(showMoreButton);
-    renderVisibleKittens(kittens.visibleEntries);
+    visibleKittens = kittens.visibleEntries;
+    kittens.renderVisibleKittens(visibleKittens);
 }
 
-function renderVisibleKittens(visibleKittens) {
-    let searchList = document.getElementById('kitten-search-list');
-    if (searchList.hasChildNodes()) searchList.innerHTML = '';
-    visibleKittens.forEach(kitten => {
-        let el = new KittenCard(kitten, showKittenModal).renderCard();
-        searchList.appendChild(el);
-    });
+function onTargetChecked(e) {
+    visibleKittens = kittens.filterByKey(e.target.name, e.target.value);
+    kittens.renderVisibleKittens(visibleKittens);
+}
+
+function onTargetUnchecked() {
+    visibleKittens = kittens.removeFilter();
+    kittens.renderVisibleKittens(visibleKittens);
 }
