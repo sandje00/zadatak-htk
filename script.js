@@ -1,9 +1,7 @@
-import { extractNumber } from './js/utils/string.js'
+import KittenCard from './js/kittenCard.js';
 import KittenCarousel from './js/kittenCarousel.js';
 import KittenModal from './js/kittenModal.js';
 import Kittens from './js/kittens.js';
-
-/* Fetch data */
 
 async function loadJSON(path) {
     const data = await fetch(path);
@@ -22,14 +20,13 @@ const kittens = new Kittens(JSON.parse(localStorage.getItem('kittens')));
 const kittenModal = new KittenModal(document.getElementById('kitten-modal-0'));
 kittenModal.init();
 
+const showKittenModal = kitten => kittenModal.showModal(kitten);
+
 const carouselItems = kittens.getTopN(4, 'age');
 const carouselElement = document.getElementById('kitten-carousel');
 const isCarouselAnimated = true;
-const carouselAction = kitten => kittenModal.showModal(kitten);
-const carousel = new KittenCarousel(carouselItems, carouselElement, isCarouselAnimated, carouselAction);
+const carousel = new KittenCarousel(carouselItems, carouselElement, isCarouselAnimated, showKittenModal);
 carousel.init();
-
-/* Search dashboard logic */
 
 let searchBox = document.getElementById('kitten-search-box');
 searchBox.addEventListener('keyup', e => onSearch(e));
@@ -91,31 +88,9 @@ function renderVisibleKittens(visibleKittens) {
     let searchList = document.getElementById('kitten-search-list');
     if (searchList.hasChildNodes()) searchList.innerHTML = '';
     visibleKittens.forEach(kitten => {
-        let el = createKittenCard(kitten);
+        let el = new KittenCard(kitten, showKittenModal).renderCard();
         searchList.appendChild(el);
     });
-}
-
-function createKittenCard(kitten) {
-    let kittenCard = document.createElement('div');
-    kittenCard.id = `kitten-${kitten.id}`;
-    kittenCard.classList.add('kitten-search-card');
-    kittenCard.addEventListener('click', e => onCardClick(e));
-    kittenCard.innerHTML = `
-        <img src="${kitten.image}" alt="${kitten.name}">
-        <div class="container flex-v align-left">
-            <h4>${kitten.name}</h4>
-            <span>Starost: ${kitten.age}</span>
-            <span>Boja: ${kitten.color}</span>
-        </div>
-    `;
-    return kittenCard;
-}
-
-function onCardClick(e) {
-    let kittenCard = e.target.closest('.kitten-search-card');
-    let id = extractNumber(kittenCard.id);
-    kittenModal.showModal(kittens.entries[id]);
 }
 
 function hideShowMoreButton() {
