@@ -1,3 +1,4 @@
+import { hide } from './js/utils/dom.js';
 import KittenCard from './js/kittenCard.js';
 import KittenCarousel from './js/kittenCarousel.js';
 import KittenModal from './js/kittenModal.js';
@@ -34,7 +35,7 @@ searchBox.addEventListener('keyup', e => onSearch(e));
 function onSearch(e) {
     let keyword = e.target.value.toUpperCase();
     renderVisibleKittens(kittens.searchByKey('name', keyword));
-    hideShowMoreButton();
+    hide(showMoreButton);
 }
 
 const NUMBER_OF_ENTRIES = 4;
@@ -70,17 +71,17 @@ function onSortByValueChange(e) {
 function onSortOrderValueChange(e) {
     currentSortOrder = e.target.value;
     renderVisibleKittens(kittens.sortByKey(currentSortBy, currentSortOrder));
-    hideShowMoreButton();
+    hide(showMoreButton);
 }
     
 function onFilterValueChange(e) {
     if (e.target.checked) renderVisibleKittens(kittens.filterByKey(e.target.name, e.target.value));
     else renderVisibleKittens(kittens.removeFilter());
-    hideShowMoreButton();
+    hide(showMoreButton);
 }
 
 function onShowMore() {
-    hideShowMoreButton();
+    hide(showMoreButton);
     renderVisibleKittens(kittens.visibleEntries);
 }
 
@@ -91,8 +92,4 @@ function renderVisibleKittens(visibleKittens) {
         let el = new KittenCard(kitten, showKittenModal).renderCard();
         searchList.appendChild(el);
     });
-}
-
-function hideShowMoreButton() {
-    showMoreButton.classList.add('display-none');
 }
