@@ -9,6 +9,14 @@
     margin-right: 2rem;
     overflow: hidden;
 
+    @media(min-width: 40rem) {
+        width: 50%;
+    }
+
+    @media(min-width: 56rem) {
+        width: 33.3333%;
+    }
+
     &:hover {
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     }
