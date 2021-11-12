@@ -14,6 +14,11 @@ class Carousel {
         this.arrows.forEach(arrow => arrow.addEventListener('click', e => this._onArrowClick(e)));
     }
 
+    refreshContent(items) {
+        this.items = items;
+        this._loadCarousel();
+    }
+
     _loadCarousel() {
         if (this.animate) this.slideShowTimeout = this._slideShow();
     }

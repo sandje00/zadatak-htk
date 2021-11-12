@@ -12,3 +12,7 @@ export function filterEqual(src, key, value) {
 export function filterLessEqual(src, key, value) {
     return src.filter(it => it[key] <= value);
 }
+
+export function filterNonMatches(src, key, value) {
+    return src.filter(it => it[key] !== value);
+}

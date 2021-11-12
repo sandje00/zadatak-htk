@@ -1,8 +1,9 @@
 import Modal from './base/modal.js';
 
 class KittenModal extends Modal {
-    constructor(element) {
+    constructor(element, event) {
         super(element);
+        this.event = event;
         this.kitten = null;
         this.card = null;
         this.adoptButton = this.element.querySelectorAll('.modal-button')[this.offset];
@@ -26,6 +27,8 @@ class KittenModal extends Modal {
     }
 
     _adoptKitten() {
+        this.event.detail.kittenId = this.kitten.id;
+        this.element.dispatchEvent(this.event);
         this.card.remove();
         this._closeModal();
     }

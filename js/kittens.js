@@ -1,5 +1,5 @@
 import { alphabeticSort, numericSort } from './utils/sort.js';
-import { filterByKeyword, filterEqual, filterLessEqual } from './utils/filter.js';
+import { filterByKeyword, filterEqual, filterLessEqual, filterNonMatches } from './utils/filter.js';
 import KittenCard from './kittenCard.js';
 class Kittens {
     constructor(entries, action) {
@@ -39,6 +39,11 @@ class Kittens {
             let el = new KittenCard(kitten, this.action).renderCard();
             searchList.appendChild(el);
         });
+    }
+
+    removeEntry(id) {
+        this.visibleEntries = filterNonMatches(this.visibleEntries, 'id', id);
+        this.entries = filterNonMatches(this.entries, 'id', id);
     }
     
     removeFilter() {

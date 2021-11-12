@@ -15,7 +15,14 @@ async function main() {
 
 main();
 
-const kittenModal = new KittenModal(document.getElementById('kitten-modal-0'));
+const kittenAdoptedEvent = new CustomEvent('kitten-adopted', {
+    detail: {},
+    bubbles: true,
+    cancelable: true,
+    composed: false
+});
+
+const kittenModal = new KittenModal(document.getElementById('kitten-modal-0'), kittenAdoptedEvent);
 kittenModal.init();
 
 const showKittenModal = kitten => kittenModal.showModal(kitten);
@@ -27,6 +34,11 @@ const carouselElement = document.getElementById('kitten-carousel');
 const isCarouselAnimated = true;
 const carousel = new KittenCarousel(carouselItems, carouselElement, isCarouselAnimated, showKittenModal);
 carousel.init();
+
+document.addEventListener('kitten-adopted', e => {
+    kittens.removeEntry(e.detail.kittenId);
+    carousel.refreshContent(kittens.getTopN(4, 'age'));
+});
 
 let searchBox = document.getElementById('kitten-search-box');
 searchBox.addEventListener('keyup', e => onSearch(e));
