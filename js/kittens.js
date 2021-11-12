@@ -1,10 +1,5 @@
-import { 
-    alphabeticSort,
-    numericSort,
-    filterByKeyword,
-    filterEqual,
-    filterLessEqual
- } from './utils/objectArray.js';
+import { alphabeticSort, numericSort } from './utils/sort.js';
+import { filterByKeyword, filterEqual, filterLessEqual } from './utils/filter.js';
 import KittenCard from './kittenCard.js';
 class Kittens {
     constructor(entries, action) {
