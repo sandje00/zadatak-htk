@@ -7,12 +7,14 @@ class Kittens {
         this.action = action;
         this.visibleEntries = this.sortByKey('age', 'asc');
         this.previouslyVisibleEntries = [[...this.visibleEntries]];
+        this.searchList = document.getElementById('kitten-search-list');
     }
     
     sortByKey(key, order) {
         const isAscending = order === 'asc' || !(order === 'desc');
-        if (key == 'age') return this._sortByAge(isAscending);
-        if (key == 'name') return this._sortByName(isAscending);
+        if (key == 'age') this.visibleEntries = this._sortByAge(isAscending);
+        if (key == 'name') this.visibleEntries = this._sortByName(isAscending);
+        return this.visibleEntries;
     }
     
     filterByKey(key, value) {
@@ -23,7 +25,8 @@ class Kittens {
     }
     
     searchByKey(key, keyword) {
-        return filterByKeyword(this.visibleEntries, key, keyword);
+        this.visibleEntries = filterByKeyword(this.visibleEntries, key, keyword);
+        return this.visibleEntries;
     }
 
     getTopN(n, key) {
@@ -33,11 +36,10 @@ class Kittens {
 
     renderVisibleKittens(items) {
         const kittens = items || this.visibleEntries;
-        const searchList = document.getElementById('kitten-search-list');
-        if (searchList.hasChildNodes()) searchList.innerHTML = '';
+        if (this.searchList.hasChildNodes()) this.searchList.innerHTML = '';
         kittens.forEach(kitten => {
             let el = new KittenCard(kitten, this.action).renderCard();
-            searchList.appendChild(el);
+            this.searchList.appendChild(el);
         });
     }
 

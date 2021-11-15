@@ -15,6 +15,13 @@ async function main() {
 
 main();
 
+const kittensUpdatedEvent = new CustomEvent('kittens-updated', {
+    detail: {},
+    bubbles: true,
+    cancelable: true,
+    composed: false
+});
+
 const kittenAdoptedEvent = new CustomEvent('kitten-adopted', {
     detail: {},
     bubbles: true,
@@ -35,6 +42,8 @@ const isCarouselAnimated = true;
 const carousel = new KittenCarousel(carouselItems, carouselElement, isCarouselAnimated, showKittenModal);
 carousel.init();
 
+document.addEventListener('kittens-updated', () => kittens.renderVisibleKittens());
+
 document.addEventListener('kitten-adopted', e => {
     kittens.removeEntry(e.detail.kittenId);
     carousel.refreshContent(kittens.getTopN(4, 'age'));
@@ -45,7 +54,7 @@ searchBox.addEventListener('keyup', e => onSearch(e));
 
 function onSearch(e) {
     let keyword = e.target.value.toUpperCase();
-    renderVisibleKittens(kittens.searchByKey('name', keyword));
+    updateKittenList(e.target, () => kittens.searchByKey('name', keyword))
     hide(showMoreButton);
 }
 
@@ -75,36 +84,28 @@ showMoreButton.addEventListener('click', onShowMore);
     
 function onSortByValueChange(e) {
     currentSortBy = e.target.value;
-    visibleKittens = kittens.sortByKey(currentSortBy, currentSortOrder);
-    kittens.renderVisibleKittens(visibleKittens);
+    updateKittenList(e.target, () => kittens.sortByKey(currentSortBy, currentSortOrder))
     showMoreButton.classList.add('display-none');
 }
     
 function onSortOrderValueChange(e) {
     currentSortOrder = e.target.value;
-    visibleKittens = kittens.sortByKey(currentSortBy, currentSortOrder);
-    kittens.renderVisibleKittens(visibleKittens);
+    updateKittenList(e.target, () => kittens.sortByKey(currentSortBy, currentSortOrder))
     hide(showMoreButton);
 }
     
 function onFilterValueChange(e) {
-    if (e.target.checked) onTargetChecked(e);
-    else onTargetUnchecked();
+    if (e.target.checked) updateKittenList(e.target, () => kittens.filterByKey(e.target.name, e.target.value));
+    else updateKittenList(e.target, () => kittens.removeFilter());
     hide(showMoreButton);
 }
 
 function onShowMore() {
+    updateKittenList(showMoreButton, () => kittens.visibleEntries);
     hide(showMoreButton);
-    visibleKittens = kittens.visibleEntries;
-    kittens.renderVisibleKittens(visibleKittens);
 }
 
-function onTargetChecked(e) {
-    visibleKittens = kittens.filterByKey(e.target.name, e.target.value);
-    kittens.renderVisibleKittens(visibleKittens);
-}
-
-function onTargetUnchecked() {
-    visibleKittens = kittens.removeFilter();
-    kittens.renderVisibleKittens(visibleKittens);
+function updateKittenList(element, updateAction) {
+    kittensUpdatedEvent.detail.kittens = updateAction();
+    element.dispatchEvent(kittensUpdatedEvent);
 }
