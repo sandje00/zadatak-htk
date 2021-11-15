@@ -1,3 +1,4 @@
+import { kittenAdoptedEvent, kittensUpdatedEvent } from './js/events.js';
 import { hide } from './js/utils/dom.js';
 import KittenCarousel from './js/kittenCarousel.js';
 import KittenModal from './js/kittenModal.js';
@@ -14,20 +15,6 @@ async function main() {
 }
 
 main();
-
-const kittensUpdatedEvent = new CustomEvent('kittens-updated', {
-    detail: {},
-    bubbles: true,
-    cancelable: true,
-    composed: false
-});
-
-const kittenAdoptedEvent = new CustomEvent('kitten-adopted', {
-    detail: {},
-    bubbles: true,
-    cancelable: true,
-    composed: false
-});
 
 const kittenModal = new KittenModal(document.getElementById('kitten-modal-0'), kittenAdoptedEvent);
 kittenModal.init();
