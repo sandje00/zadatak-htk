@@ -1,5 +1,5 @@
-import { kittenAdoptedEvent, kittensUpdatedEvent } from './js/events.js';
-import { hide } from './js/utils/dom.js';
+import { hide, updateKittenList } from './js/utils/dom.js';
+import { kittenAdoptedEvent } from './js/events.js';
 import KittenCarousel from './js/kittenCarousel.js';
 import KittenModal from './js/kittenModal.js';
 import Kittens from './js/kittens.js';
@@ -29,7 +29,7 @@ const isCarouselAnimated = true;
 const carousel = new KittenCarousel(carouselItems, carouselElement, isCarouselAnimated, showKittenModal);
 carousel.init();
 
-document.addEventListener('kittens-updated', () => kittens.renderVisibleKittens());
+document.addEventListener('kittens-updated', e => kittens.renderVisibleKittens(e.detail.kittens));
 
 document.addEventListener('kitten-adopted', e => {
     kittens.removeEntry(e.detail.kittenId);
@@ -37,11 +37,11 @@ document.addEventListener('kitten-adopted', e => {
 });
 
 let searchBox = document.getElementById('kitten-search-box');
-searchBox.addEventListener('keyup', e => onSearch(e));
+searchBox.addEventListener('input', e => onSearch(e));
 
 function onSearch(e) {
     let keyword = e.target.value.toUpperCase();
-    updateKittenList(e.target, () => kittens.searchByKey('name', keyword))
+    updateKittenList(e.target, () => kittens.searchByKey('name', keyword));
     hide(showMoreButton);
 }
 
@@ -90,9 +90,4 @@ function onFilterValueChange(e) {
 function onShowMore() {
     updateKittenList(showMoreButton, () => kittens.visibleEntries);
     hide(showMoreButton);
-}
-
-function updateKittenList(element, updateAction) {
-    kittensUpdatedEvent.detail.kittens = updateAction();
-    element.dispatchEvent(kittensUpdatedEvent);
 }

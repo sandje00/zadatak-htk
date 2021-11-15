@@ -25,8 +25,7 @@ class Kittens {
     }
     
     searchByKey(key, keyword) {
-        this.visibleEntries = filterByKeyword(this.visibleEntries, key, keyword);
-        return this.visibleEntries;
+        return filterByKeyword(this.visibleEntries, key, keyword);
     }
 
     getTopN(n, key) {
@@ -34,8 +33,7 @@ class Kittens {
         return n <= sorted.length && sorted.slice(0, n);
     }
 
-    renderVisibleKittens(items) {
-        const kittens = items || this.visibleEntries;
+    renderVisibleKittens(kittens) {
         if (this.searchList.hasChildNodes()) this.searchList.innerHTML = '';
         kittens.forEach(kitten => {
             let el = new KittenCard(kitten, this.action).renderCard();
@@ -68,7 +66,6 @@ class Kittens {
     _filterByColor(value) {
         return filterEqual(this.visibleEntries, 'color', value);
     }
-    
 }
 
 export default Kittens;
