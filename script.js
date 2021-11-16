@@ -1,4 +1,5 @@
 import { hide, updateKittenList } from './js/utils/dom.js';
+import debounce from './js/utils/debounce.js';
 import { kittenAdoptedEvent } from './js/events.js';
 import KittenCarousel from './js/kittenCarousel.js';
 import KittenModal from './js/kittenModal.js';
@@ -37,13 +38,16 @@ document.addEventListener('kitten-adopted', e => {
 });
 
 let searchBox = document.getElementById('kitten-search-box');
-searchBox.addEventListener('input', e => onSearch(e));
 
-function onSearch(e) {
+const onSearch = debounce(e => searchKittens(e), 300);
+
+function searchKittens(e) {
     let keyword = e.target.value.toUpperCase();
     updateKittenList(e.target, () => kittens.searchByKey('name', keyword));
     hide(showMoreButton);
 }
+
+searchBox.addEventListener('input', e => onSearch(e));
 
 const NUMBER_OF_ENTRIES = 4;
 let visibleKittens = kittens.getTopN(NUMBER_OF_ENTRIES, 'age');
