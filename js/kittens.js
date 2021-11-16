@@ -1,5 +1,7 @@
-import { alphabeticSort, numericSort } from './utils/sort.js';
 import { filterByKeyword, filterEqual, filterLessEqual, filterNonMatches } from './utils/filter.js';
+import { alphabeticSort, numericSort } from './utils/sort.js';
+import { hide, updateKittenList } from './utils/dom.js';
+import debounce from './utils/debounce.js';
 import KittenCard from './kittenCard.js';
 class Kittens {
     constructor(entries, action) {
@@ -8,6 +10,16 @@ class Kittens {
         this.visibleEntries = this.sortByKey('age', 'asc');
         this.previouslyVisibleEntries = [[...this.visibleEntries]];
         this.searchList = document.getElementById('kitten-search-list');
+        this.searchBox = document.getElementById('kitten-search-box');
+        this.showMoreButton = document.getElementById('show-more');
+    }
+
+    init() {
+        const INIT_LIST_ITEMS_NUM = 4;
+        const initKittens = this.getTopN(INIT_LIST_ITEMS_NUM, 'age');
+        this.renderVisibleKittens(initKittens);
+        this.searchBox.addEventListener('input', e => debounce(e => this._onSearch(e), 300)(e));
+        this.showMoreButton.addEventListener('click', () => this._onShowMore());
     }
     
     sortByKey(key, order) {
@@ -39,6 +51,7 @@ class Kittens {
             let el = new KittenCard(kitten, this.action).renderCard();
             this.searchList.appendChild(el);
         });
+        return this;
     }
 
     removeEntry(id) {
@@ -49,6 +62,25 @@ class Kittens {
     removeFilter() {
         this.visibleEntries = this.previouslyVisibleEntries.pop();
         return this.visibleEntries;
+    }
+
+    hideShowMoreButton() {
+        let executed = false;
+        return () => {
+            if (!executed) {
+                executed = true;
+                hide(this.showMoreButton);
+            }
+        }
+    }
+
+    _onSearch(e) {
+        let keyword = e.target.value.toUpperCase();
+        updateKittenList(e.target, () => this.searchByKey('name', keyword));
+    }
+
+    _onShowMore() {
+        updateKittenList(this.showMoreButton, () => this.visibleEntries);
     }
     
     _sortByAge(isAscending) {
