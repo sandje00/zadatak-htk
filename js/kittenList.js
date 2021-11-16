@@ -3,15 +3,21 @@ import { alphabeticSort, numericSort } from './utils/sort.js';
 import { hide, updateKittenList } from './utils/dom.js';
 import debounce from './utils/debounce.js';
 import KittenCard from './kittenCard.js';
-class Kittens {
+
+class KittenList {
     constructor(entries, action) {
         this.entries = entries;
         this.action = action;
-        this.visibleEntries = this.sortByKey('age', 'asc');
-        this.previouslyVisibleEntries = [[...this.visibleEntries]];
         this.searchList = document.getElementById('kitten-search-list');
         this.searchBox = document.getElementById('kitten-search-box');
         this.showMoreButton = document.getElementById('show-more');
+        this.radioSortBy = document.querySelectorAll('input[type=radio][name="sort-by"]');
+        this.radioSortOrder = document.querySelectorAll('input[type=radio][name="sort-order"]');
+        this.checkboxFilter = document.querySelectorAll('input[type=checkbox]');
+        this.visibleEntries = this.sortByKey('age', 'asc');
+        this.previouslyVisibleEntries = [[...this.visibleEntries]];
+        this.currentSortBy = 'age';
+        this.currentSortOrder = 'asc';
     }
 
     init() {
@@ -20,6 +26,15 @@ class Kittens {
         this.renderVisibleKittens(initKittens);
         this.searchBox.addEventListener('input', e => debounce(e => this._onSearch(e), 300)(e));
         this.showMoreButton.addEventListener('click', () => this._onShowMore());
+        this.radioSortBy.forEach(radio => {
+            radio.checked = radio.value === this.currentSortBy;
+            radio.addEventListener('change', e => this._onSortByValueChange(e));
+        });
+        this.radioSortOrder.forEach(radio => {
+            radio.checked = radio.value === this.currentSortOrder;
+            radio.addEventListener('change', e => this._onSortOrderValueChange(e));
+        });
+        this.checkboxFilter.forEach(checkbox => checkbox.addEventListener('change', e => this._onFilterValueChange(e)));
     }
     
     sortByKey(key, order) {
@@ -82,6 +97,21 @@ class Kittens {
     _onShowMore() {
         updateKittenList(this.showMoreButton, () => this.visibleEntries);
     }
+
+    _onSortByValueChange(e) {
+        this.currentSortBy = e.target.value;
+        updateKittenList(e.target, () => this.sortByKey(this.currentSortBy, this.currentSortOrder));
+    }
+
+    _onSortOrderValueChange(e) {
+        this.currentSortOrder = e.target.value;
+        updateKittenList(e.target, () => this.sortByKey(this.currentSortBy, this.currentSortOrder));
+    }
+
+    _onFilterValueChange(e) {
+        if (e.target.checked) updateKittenList(e.target, () => this.filterByKey(e.target.name, e.target.value));
+        else updateKittenList(e.target, () => this.removeFilter());
+    }
     
     _sortByAge(isAscending) {
         return numericSort(this.entries, 'age', isAscending);
@@ -100,4 +130,4 @@ class Kittens {
     }
 }
 
-export default Kittens;
+export default KittenList;

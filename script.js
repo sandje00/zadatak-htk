@@ -1,8 +1,7 @@
 import { kittenAdoptedEvent } from './js/events.js';
 import KittenCarousel from './js/kittenCarousel.js';
 import KittenModal from './js/kittenModal.js';
-import Kittens from './js/kittens.js';
-import { updateKittenList } from './js/utils/dom.js';
+import Kittens from './js/kittenList.js';
 
 async function loadJSON(path) {
     const data = await fetch(path);
@@ -37,35 +36,3 @@ document.addEventListener('kitten-adopted', e => {
     kittens.removeEntry(e.detail.kittenId);
     carousel.refreshContent(kittens.getTopN(4, 'age'));
 });
-
-let radioSortBy = document.querySelectorAll('input[type=radio][name="sort-by"]');
-let currentSortBy = 'age';
-radioSortBy.forEach(radio => {
-    radio.checked = radio.value === currentSortBy;
-    radio.addEventListener('change', e => onSortByValueChange(e));
-});
-
-let radioSortOrder = document.querySelectorAll('input[type=radio][name="sort-order"]');
-let currentSortOrder = 'asc';
-radioSortOrder.forEach(radio => {
-    radio.checked = radio.value === currentSortOrder;
-    radio.addEventListener('change', e => onSortOrderValueChange(e));
-});
-
-let checkboxFilter = document.querySelectorAll('input[type=checkbox]');
-checkboxFilter.forEach(filter => filter.addEventListener('change', e => onFilterValueChange(e)));
-    
-function onSortByValueChange(e) {
-    currentSortBy = e.target.value;
-    updateKittenList(e.target, () => kittens.sortByKey(currentSortBy, currentSortOrder));
-}
-    
-function onSortOrderValueChange(e) {
-    currentSortOrder = e.target.value;
-    updateKittenList(e.target, () => kittens.sortByKey(currentSortBy, currentSortOrder));
-}
-    
-function onFilterValueChange(e) {
-    if (e.target.checked) updateKittenList(e.target, () => kittens.filterByKey(e.target.name, e.target.value));
-    else updateKittenList(e.target, () => kittens.removeFilter());
-}
