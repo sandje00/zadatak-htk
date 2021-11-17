@@ -17,16 +17,6 @@ class KittenCarousel extends Carousel{
         super._loadCarousel();
     }
 
-    _loadSlide(slide) {
-        slide.innerHTML = '';
-        if (slide.classList.contains('left-side'))
-            slide.appendChild(this._createSlideContent(this.items[this.previous]));
-        if (slide.classList.contains('active'))
-            slide.appendChild(this._createSlideContent(this.items[this.current], true));
-        if (slide.classList.contains('right-side'))
-            slide.appendChild(this._createSlideContent(this.items[this.next]));
-    }
-
     _createSlideContent(item, isActive = false) {
         const slideContent = document.createElement('img');
         slideContent.src = item.image;
