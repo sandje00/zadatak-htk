@@ -12,11 +12,12 @@
 
         &-list {
             max-width: 88rem;
+            margin-bottom: 2rem;
         }
 
         &-button {
-            margin-top: 2rem;
-            position: absolute;
+            margin-bottom: 2rem;
+            position: relative;
             left: 40%;
         }
     }
