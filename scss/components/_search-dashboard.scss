@@ -18,7 +18,22 @@
         &-button {
             margin-bottom: 2rem;
             position: relative;
-            left: 40%;
+
+            @media(min-width: 300px) {
+                left: 15%;
+            }
+
+            @media(min-width: 600px) {
+                left: 32%;
+            }
+
+            @media(min-width: 1024px) {
+                left: 24%;
+            }
+
+            @media(min-width: 1200px) {
+                left: 37.5%;
+            }
         }
     }
 }

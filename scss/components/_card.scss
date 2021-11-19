@@ -9,12 +9,16 @@
     margin-right: 2rem;
     overflow: hidden;
 
-    @media(min-width: 40rem) {
-        width: 50%;
+    @media(min-width: 640px) {
+        width: 40%;
     }
 
-    @media(min-width: 56rem) {
-        width: 33.3333%;
+    @media(min-width: 896px) {
+        width: 30%;
+    }
+
+    @media(min-width: 1200px) {
+        width: 20%;
     }
 
     &:hover {
