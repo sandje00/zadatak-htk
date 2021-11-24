@@ -14,7 +14,8 @@ class KittenList {
         this.radioSortBy = document.querySelectorAll('input[type=radio][name="sort-by"]');
         this.radioSortOrder = document.querySelectorAll('input[type=radio][name="sort-order"]');
         this.checkboxFilter = document.querySelectorAll('input[type=checkbox]');
-        this.appliedFilters = [];
+        this.initListItemsNum = 4;
+        this.appliedTransformations = [];
         this.history = [];
         this.visibleEntries = this._sortByAge(this.entries, true);
         this.currentSortBy = 'age';
@@ -22,11 +23,8 @@ class KittenList {
     }
 
     init() {
-        this.appliedFilters.push('sort-age-asc');
-        this.history.push([...this.visibleEntries]);
-        const INIT_LIST_ITEMS_NUM = 4;
-        const initKittens = this.getTopN(INIT_LIST_ITEMS_NUM, 'age');
-        this.renderVisibleKittens(initKittens);
+        this._updateHistory('sort-age-asc', [...this.visibleEntries]);
+        this.renderVisibleKittens(this.getTopN(this.initListItemsNum, 'age'));
         this.searchBox.addEventListener('input', e => debounce(e => this._onSearch(e), 300)(e));
         this.showMoreButton.addEventListener('click', () => this._onShowMore());
         this.radioSortBy.forEach(radio => {
@@ -41,8 +39,7 @@ class KittenList {
     }
     
     sortByKey(key, order) {
-        this.appliedFilters.push('sort-' + key + '-' + order);
-        this.history.push([...this.visibleEntries]);
+        this._updateHistory('sort-' + key + '-' + order, [...this.visibleEntries]);
         const isAscending = order === 'asc' || !(order === 'desc');
         if (key == 'age') this.visibleEntries = this._sortByAge(this.visibleEntries, isAscending);
         if (key == 'name') this.visibleEntries = this._sortByName(this.visibleEntries, isAscending);
@@ -50,8 +47,7 @@ class KittenList {
     }
     
     filterByKey(key, value) {
-        this.appliedFilters.push('filter-' + key + '-' + value);
-        this.history.push([...this.visibleEntries]);
+        this._updateHistory('filter-' + key + '-' + value, [...this.visibleEntries]);
         if (key === 'age') this.visibleEntries = this._filterByAge(value);
         if (key === 'color') this.visibleEntries = this._filterByColor(value);
         return this.visibleEntries;
@@ -69,7 +65,7 @@ class KittenList {
     }
 
     renderVisibleKittens(kittens) {
-        console.log(this.appliedFilters);
+        console.log(this.appliedTransformations);
         if (this.searchList.hasChildNodes()) this.searchList.innerHTML = '';
         kittens.forEach(kitten => {
             let el = new KittenCard(kitten, this.action).renderCard();
@@ -84,29 +80,8 @@ class KittenList {
     }
     
     removeFilter(key, value) {
-        const index = this.appliedFilters.lastIndexOf('filter-' + key + '-' + value);
-
-        if (index === -1) return;
-        if (index === this.appliedFilters.length - 1) {
-            this.appliedFilters.pop();
-            this.visibleEntries = this.history.pop();
-        } else {
-            this.history.splice(index);
-            this.visibleEntries = this.history[this.history.length - 1];
-            const rest = this.appliedFilters.splice(index);
-            rest.shift();
-
-            const actions = [];
-            rest.forEach(it => {
-                let action = {};
-                let typeKeyValue = it.split('-');
-                action.actionType = typeKeyValue[0];
-                action.key = typeKeyValue[1];
-                action.value = typeKeyValue[2];
-                actions.push(action);
-            });
-            this._applyMultipleActions(actions);
-        }
+        const index = this.appliedTransformations.lastIndexOf('filter-' + key + '-' + value);
+        this._removeTransformation(index);
         return this.visibleEntries;
     }
 
@@ -144,10 +119,39 @@ class KittenList {
         else updateKittenList(e.target, () => this.removeFilter(e.target.name, e.target.value));
     }
 
-    _applyMultipleActions(actions) {
-        actions.forEach(({ actionType, key, value }) => {
-            if (actionType === 'sort') this.visibleEntries = this.sortByKey(key, value);
-            if (actionType === 'filter') this.visibleEntries = this.filterByKey(key, value);
+    _updateHistory(transformationName, items) {
+        this.appliedTransformations.push(transformationName);
+        this.history.push(items);
+    }
+
+    _removeTransformation(index) {
+        if (index === -1) return;
+        if (index === this.appliedTransformations.length - 1) {
+            this.appliedTransformations.pop();
+            this.visibleEntries = this.history.pop();
+        }
+        else {
+            this.history.splice(index);
+            this.visibleEntries = this.history[this.history.length - 1];
+            const rest = this.appliedTransformations.splice(index);
+            rest.shift();
+            const transformations = [];
+            rest.forEach(it => {
+                let transformation = {};
+                let typeKeyValue = it.split('-');
+                transformation.transformationType = typeKeyValue[0];
+                transformation.key = typeKeyValue[1];
+                transformation.value = typeKeyValue[2];
+                transformations.push(transformation);
+            });
+            this._applyMultipleTransformations(transformations);
+        }
+    }
+
+    _applyMultipleTransformations(transformations) {
+        transformations.forEach(({ transformationType, key, value }) => {
+            if (transformationType === 'sort') this.visibleEntries = this.sortByKey(key, value);
+            if (transformationType === 'filter') this.visibleEntries = this.filterByKey(key, value);
         });
         this.renderVisibleKittens(this.visibleEntries);
     }
