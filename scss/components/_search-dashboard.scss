@@ -3,6 +3,10 @@
         position: absolute;
         left: 20%;
 
+        @media(max-width: 800px) {
+            left: 10%;
+        }
+
         &-container {
             margin-top: 1.5rem;
             padding: 0.5rem 1rem;
@@ -11,7 +15,7 @@
         }
 
         &-list {
-            max-width: 88rem;
+            max-width: 80vw;
             margin-bottom: 2rem;
         }
 
