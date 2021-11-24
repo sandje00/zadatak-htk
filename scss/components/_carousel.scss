@@ -5,6 +5,14 @@
         position: relative;
         height: 400px;
 
+        @media(max-width: 700px) {
+            height: 300px;
+        }
+
+        @media(max-width: 420px) {
+            height: 250px;
+        }
+
         img {
             width: 400px;
             height: 400px;
@@ -18,16 +26,33 @@
                 opacity: 1;
                 transition: transform .2s ease;
 
+                @media(max-width: 700px) {
+                    width: 300px;
+                    height: 300px;
+                }
+
+                @media(max-width: 420px) {
+                    width: 250px;
+                    height: 250px;
+                }
+
                 &:hover {
                     cursor: pointer;
                     transform: scale(1.2);
                 }
             }
         }
+
+        .left-side, .right-side {
+            img {
+                @media(max-width: 1217px) {
+                    display: none;
+                }
+            }
+        }
     }
 
     &-button {
-        font-size: 3rem;
         z-index: 10;
         position: absolute;
         top: 50%;
