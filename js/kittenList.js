@@ -15,7 +15,7 @@ class KittenList {
         this.radioSortOrder = document.querySelectorAll('input[type=radio][name="sort-order"]');
         this.checkboxFilter = document.querySelectorAll('input[type=checkbox]');
         this.initListItemsNum = 4;
-        this.appliedTransformations = [];
+        this.appliedFilters = [];
         this.history = [];
         this.visibleEntries = this._sortByAge(this.entries, true);
         this.currentSortBy = 'age';
@@ -23,7 +23,7 @@ class KittenList {
     }
 
     init() {
-        this._updateHistory('sort-age-asc', [...this.visibleEntries]);
+        this._updateHistory([...this.visibleEntries], null);
         this.renderVisibleKittens(this.getTopN(this.initListItemsNum, 'age'));
         this.searchBox.addEventListener('input', e => debounce(e => this._onSearch(e), 300)(e));
         this.showMoreButton.addEventListener('click', () => this._onShowMore());
@@ -39,7 +39,6 @@ class KittenList {
     }
     
     sortByKey(key, order) {
-        this._updateHistory('sort-' + key + '-' + order, [...this.visibleEntries]);
         const isAscending = order === 'asc' || !(order === 'desc');
         if (key == 'age') this.visibleEntries = this._sortByAge(this.visibleEntries, isAscending);
         if (key == 'name') this.visibleEntries = this._sortByName(this.visibleEntries, isAscending);
@@ -47,7 +46,7 @@ class KittenList {
     }
     
     filterByKey(key, value) {
-        this._updateHistory('filter-' + key + '-' + value, [...this.visibleEntries]);
+        this._updateHistory([...this.visibleEntries], key + '-' + value);
         if (key === 'age') this.visibleEntries = this._filterByAge(value);
         if (key === 'color') this.visibleEntries = this._filterByColor(value);
         return this.visibleEntries;
@@ -65,7 +64,6 @@ class KittenList {
     }
 
     renderVisibleKittens(kittens) {
-        console.log(this.appliedTransformations);
         if (this.searchList.hasChildNodes()) this.searchList.innerHTML = '';
         kittens.forEach(kitten => {
             let el = new KittenCard(kitten, this.action).renderCard();
@@ -80,8 +78,10 @@ class KittenList {
     }
     
     removeFilter(key, value) {
-        const index = this.appliedTransformations.lastIndexOf('filter-' + key + '-' + value);
-        this._removeTransformation(index);
+        const index = this.appliedFilters.lastIndexOf(key + '-' + value);
+        if (index === -1) return;
+        if (index === this.appliedFilters.length - 1) this._removeLastFilter();
+        else this._removeInnerFilter(index);
         return this.visibleEntries;
     }
 
@@ -119,40 +119,35 @@ class KittenList {
         else updateKittenList(e.target, () => this.removeFilter(e.target.name, e.target.value));
     }
 
-    _updateHistory(transformationName, items) {
-        this.appliedTransformations.push(transformationName);
+    _updateHistory(items, filterName) {
         this.history.push(items);
+        this.appliedFilters.push(filterName);
     }
 
-    _removeTransformation(index) {
-        if (index === -1) return;
-        if (index === this.appliedTransformations.length - 1) {
-            this.appliedTransformations.pop();
-            this.visibleEntries = this.history.pop();
-        }
-        else {
-            this.history.splice(index);
-            this.visibleEntries = this.history[this.history.length - 1];
-            const rest = this.appliedTransformations.splice(index);
-            rest.shift();
-            const transformations = [];
-            rest.forEach(it => {
-                let transformation = {};
-                let typeKeyValue = it.split('-');
-                transformation.transformationType = typeKeyValue[0];
-                transformation.key = typeKeyValue[1];
-                transformation.value = typeKeyValue[2];
-                transformations.push(transformation);
-            });
-            this._applyMultipleTransformations(transformations);
-        }
+    _removeLastFilter() {
+        this.appliedFilters.pop();
+        this.visibleEntries = this.history.pop();
     }
 
-    _applyMultipleTransformations(transformations) {
-        transformations.forEach(({ transformationType, key, value }) => {
-            if (transformationType === 'sort') this.visibleEntries = this.sortByKey(key, value);
-            if (transformationType === 'filter') this.visibleEntries = this.filterByKey(key, value);
+    _removeInnerFilter(index) {
+        this.history.splice(index);
+        this.visibleEntries = this.history[this.history.length - 1];
+        const rest = this.appliedFilters.splice(index);
+        rest.shift();
+        const filters = [];
+        rest.forEach(it => {
+            let filter = {};
+            let keyValue = it.split('-');
+            filter.key = keyValue[0];
+            filter.value = keyValue[1];
+            filters.push(filter);
         });
+        this._applyMultipleFilters(filters);
+    }
+
+    _applyMultipleFilters(filters) {
+        filters.forEach(({ key, value }) => { this.visibleEntries = this.filterByKey(key, value); });
+        this.visibleEntries = this.sortByKey(this.currentSortBy, this.currentSortOrder);
         this.renderVisibleKittens(this.visibleEntries);
     }
     
