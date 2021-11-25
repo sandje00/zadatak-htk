@@ -5,11 +5,11 @@
         position: relative;
         height: 400px;
 
-        @media(max-width: 700px) {
+        @media(max-width: $measure-m) {
             height: 300px;
         }
 
-        @media(max-width: 420px) {
+        @media(max-width: $measure-xxs) {
             height: 250px;
         }
 
@@ -26,12 +26,12 @@
                 opacity: 1;
                 transition: transform .2s ease;
 
-                @media(max-width: 700px) {
+                @media(max-width: $measure-m) {
                     width: 300px;
                     height: 300px;
                 }
 
-                @media(max-width: 420px) {
+                @media(max-width: $measure-xxs) {
                     width: 250px;
                     height: 250px;
                 }
@@ -45,7 +45,7 @@
 
         .left-side, .right-side {
             img {
-                @media(max-width: 1217px) {
+                @media(max-width: $measure-xxxl) {
                     display: none;
                 }
             }

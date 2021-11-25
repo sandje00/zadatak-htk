@@ -2,22 +2,22 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     transition: 0.3s;
     border-radius: 5px;
-    background-color: $white;
+    background-color: $color-white;
     cursor: pointer;
     width: 20rem;
     margin-top: 2.5rem;
     margin-right: 2rem;
     overflow: hidden;
 
-    @media(min-width: 640px) {
+    @media(min-width: $measure-s) {
         width: 40%;
     }
 
-    @media(min-width: 896px) {
+    @media(min-width: $measure-l) {
         width: 30%;
     }
 
-    @media(min-width: 1200px) {
+    @media(min-width: $measure-xxxl) {
         width: 20%;
     }
 
@@ -34,7 +34,7 @@
 
     .container {
         padding: 1rem;
-        color: $black;
+        color: $color-black;
 
         h4 {
             font-size: 1.5rem;

@@ -31,12 +31,12 @@
                 </button>
             </div>
         </div>
-        <div class="kitten-search">
+        <div class="dashboard">
             <div class="flex-v">
-                <div class="choice-sort">
+                <div class="flex-h">
                     <div class="choice">
                         <p>Sortiraj po:</p>
-                        <div class="choice-group">
+                        <div class="flex-h flex-xl-col">
                             <label class="choice-label">
                                 <input type="radio" name="sort-by" value="age" id="sort-by-age">
                                 <span class="checkmark radio"></span>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="choice">
                         <p>U smjeru:</p>
-                        <div class="choice-group">
+                        <div class="flex-h flex-xl-col">
                             <label class="choice-label">
                                 <input type="radio" name="sort-order" value="asc" id="sort-asc">
                                 <span class="checkmark radio"></span>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="choice">
                     <p>Filtriraj:</p>
-                    <div class="choice-group">
+                    <div class="flex-h flex-xl-col">
                         <label class="choice-label">
                             <input type="checkbox" name="age" value="12">
                             <span class="checkmark checkbox"></span>
@@ -85,12 +85,12 @@
                         </label>
                     </div>
                 </div>
-                <div class="kitten-search-container flex-h align-center align-self-start">
-                    <input type="text" placeholder="Search" id="kitten-search-box" class="kitten-search-box">
+                <div class="search flex-h align-center align-self-start">
+                    <input type="text" placeholder="Search" id="kitten-search-box" class="search-box">
                 </div>
             </div>
-            <div id="kitten-search-list" class ="kitten-search-list flex-h wrap"></div>
-            <button id="show-more" class="kitten-search-button button-accent">
+            <div id="kitten-list" class ="dashboard-list flex-h wrap"></div>
+            <button id="show-more" class="dashboard-button button-accent">
                 Prikaži više
             </button>
             <div id="kitten-modal-0" class="modal display-none">

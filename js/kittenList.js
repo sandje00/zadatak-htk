@@ -8,7 +8,7 @@ class KittenList {
     constructor(entries, action) {
         this.entries = entries;
         this.action = action;
-        this.searchList = document.getElementById('kitten-search-list');
+        this.searchList = document.getElementById('kitten-list');
         this.searchBox = document.getElementById('kitten-search-box');
         this.showMoreButton = document.getElementById('show-more');
         this.radioSortBy = document.querySelectorAll('input[type=radio][name="sort-by"]');

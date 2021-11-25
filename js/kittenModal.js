@@ -37,8 +37,8 @@ class KittenModal extends Modal {
         let kittenInfo = `
             <img src="${this.kitten.image}" alt="${this.kitten.name}">
             <h4>${this.kitten.name}</h4>
-            <span>Starost: ${this.kitten.age}</span>
-            <span>Boja: ${this.kitten.color}</span>
+            <span class="align-self-start">Starost: ${this.kitten.age}</span>
+            <span class="align-self-start">Boja: ${this.kitten.color}</span>
         `;
         let kittenInfoContainer = document.createElement('div');
         kittenInfoContainer.classList.add('kitten-info', 'flex-v', 'justify-center', 'align-center');

@@ -8,6 +8,12 @@
     flex-direction: column;
 }
 
+.flex-xl-col {
+    @media(max-width: $measure-xl) {
+        flex-direction: column;
+    }
+}
+
 .wrap {
     flex-wrap: wrap;
 }

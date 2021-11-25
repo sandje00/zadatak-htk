@@ -1,0 +1,22 @@
+.search {
+    margin-top: 1.5rem;
+    padding: 0.5rem 1rem;
+    background-color: $color-white;
+    border-radius: 20px;
+    
+    &-box {
+        width: 15rem;
+        height: 2rem;
+        border: none;
+
+        &::placeholder {
+            color: $color-primary;
+            font-size: 1rem;
+        }
+
+        &:focus {
+            outline: none;
+            border-bottom: 1px solid $color-primary;
+        }
+    }
+}

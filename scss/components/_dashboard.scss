@@ -1,0 +1,34 @@
+.dashboard {
+    position: absolute;
+    left: 20%;
+
+    @media(max-width: 800px) {
+        left: 10%;
+    }
+
+    &-list {
+        max-width: 80vw;
+        margin-bottom: 2rem;
+    }
+
+    &-button {
+        margin-bottom: 2rem;
+        position: relative;
+
+        @media(min-width: $measure-xxxs) {
+            left: 20%;
+        }
+
+        @media(min-width: $measure-xs) {
+            left: 32%;
+        }
+
+        @media(min-width: $measure-xxl) {
+            left: 24%;
+        }
+
+        @media(min-width: $measure-xxxl) {
+            left: 37.5%;
+        }
+    }
+}
