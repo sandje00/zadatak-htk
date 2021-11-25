@@ -40,5 +40,208 @@
         "color": "siva",
         "age": 3,
         "image": "/images/maks.jpg"
+    },
+    {
+        "id": 7,
+        "name": "Noa",
+        "age": 2,
+        "color": "smedja",
+        "imgUrl": "/images/noa.jpg"
+    },
+    {
+        "id": 8,
+        "name": "Mickey",
+        "age": 9,
+        "color": "smedja",
+        "imgUrl": "/images/mickey.jpg"
+    },
+    {
+        "id": 9,
+        "name": "Gloria",
+        "age": 7,
+        "color": "smedja",
+        "imgUrl": "/images/gloria.jpg"
+    },
+    {
+        "id": 10,
+        "name": "Denis",
+        "age": 4,
+        "color": "siva",
+        "imgUrl": "/images/denis.jpg"
+    },
+    {
+        "id": 11,
+        "name": "Snowflake",
+        "age": 2,
+        "color": "white",
+        "imgUrl": "/images/snowflake.jpg"
+    },
+    {
+        "id": 12,
+        "name": "Gigi",
+        "age": 2,
+        "color": "ginger",
+        "imgUrl": "/images/gigi.jpg"
+    },
+    {
+        "id": 13,
+        "name": "Sofi",
+        "age": 3,
+        "color": "ginger",
+        "imgUrl": "/images/sofi.jpg"
+    },
+    {
+        "id": 14,
+        "name": "Mimi",
+        "age": 11,
+        "color": "siva",
+        "imgUrl": "/images/mimi.jpg"
+    },
+    {
+        "id": 15,
+        "name": "Somokey",
+        "age": 11,
+        "color": "siva",
+        "imgUrl": "/images/smokey.jpg"
+    },
+    {
+        "id": 16,
+        "name": "Sily",
+        "age": 2,
+        "color": "smedja",
+        "imgUrl": "/images/sily.jpg"
+    },
+    {
+        "id": 17,
+        "name": "Ambri",
+        "age": 5,
+        "color": "siva",
+        "imgUrl": "/images/ambri.jpg"
+    },
+    {
+        "id": 18,
+        "name": "Doby",
+        "age": 5,
+        "color": "zuta",
+        "imgUrl": "/images/doby.jpg"
+    },
+    {
+        "id": 19,
+        "name": "Shely",
+        "age": 3,
+        "color": "smedja",
+        "imgUrl": "/images/shely.jpg"
+    },
+    {
+        "id": 20,
+        "name": "Michelle",
+        "age": 7,
+        "color": "siva",
+        "imgUrl": "/images/michelle.jpg"
+    },
+    {
+        "id": 21,
+        "name": "Joy",
+        "age": 6,
+        "color": "bijela",
+        "imgUrl": "/images/joy.jpg"
+    },
+    {
+        "id": 22,
+        "name": "Sky",
+        "age": 8,
+        "color": "bijela",
+        "imgUrl": "/images/sky.jpg"
+    },
+    {
+        "id": 23,
+        "name": "Bestie",
+        "age": 4,
+        "color": "crna",
+        "imgUrl": "/images/bestie.jpg"
+    },
+    {
+        "id": 24,
+        "name": "Corny",
+        "age": 8,
+        "color": "crna",
+        "imgUrl": "/images/corny.jpg"
+    },
+    {
+        "id": 25,
+        "name": "Selma",
+        "age": 3,
+        "color": "zuta",
+        "imgUrl": "/images/selma.jpg"
+    },
+    {
+        "id": 26,
+        "name": "May",
+        "age": 6,
+        "color": "bijela",
+        "imgUrl": "/images/may.jpg"
+    },
+    {
+        "id": 27,
+        "name": "Izzy",
+        "age": 4,
+        "color": "zuta",
+        "imgUrl": "/images/izzy.jpg"
+    },
+    {
+        "id": 28,
+        "name": "Kali",
+        "age": 5,
+        "color": "bijela",
+        "imgUrl": "/images/kali.jpg"
+    },
+    {
+        "id": 29,
+        "name": "Don",
+        "age": 4,
+        "color": "smedja",
+        "imgUrl": "/images/don.jpg"
+    },
+    {
+        "id": 30,
+        "name": "Pole",
+        "age": 2,
+        "color": "zuta",
+        "imgUrl": "/images/pole.jpg"
+    },
+    {
+        "id": 31,
+        "name": "Brownie",
+        "age": 8,
+        "color": "smedja",
+        "imgUrl": "/images/brownie.jpg"
+    },
+    {
+        "id": 32,
+        "name": "Ziggy",
+        "age": 2,
+        "color": "smedja",
+        "imgUrl": "/images/ziggy.jpg"
+    },
+    {
+        "id": 33,
+        "name": "Villy",
+        "age": 5,
+        "color": "zuta",
+        "imgUrl": "/images/villy.jpg"
+    },
+    {
+        "id": 34,
+        "name": "Harry",
+        "age": 4,
+        "color": "siva",
+        "imgUrl": "/images/harry.jpg"
+    },
+    {
+        "id": 35,
+        "name": "Nashi",
+        "age": 3,
+        "color": "crna",
+        "imgUrl": "/images/nashi.jpg"
     }
 ]
