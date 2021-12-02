@@ -243,5 +243,40 @@
         "age": 3,
         "color": "crna",
         "image": "/images/nashi.jpg"
+    },
+    {
+        "id": 36,
+        "name": "Tom",
+        "age": 4,
+        "color": "siva",
+        "image": "/images/tom.jpg"
+    },
+    {
+        "id": 37,
+        "name": "Blackie",
+        "age": 7,
+        "color": "crna",
+        "image": "/images/blackie.png"
+    },
+    {
+        "id": 38,
+        "name": "Otis",
+        "age": 10,
+        "color": "crna",
+        "image": "/images/otis.jpg"
+    },
+    {
+        "id": 39,
+        "name": "Emily",
+        "age": 8,
+        "color": "zuta",
+        "image": "/images/emily.jpg"
+    },
+    {
+        "id": 40,
+        "name": "Greta",
+        "age": 3,
+        "color": "bijela",
+        "image": "/images/greta.jpg"
     }
 ]

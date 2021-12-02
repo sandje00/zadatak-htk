@@ -14,7 +14,7 @@ class KittenList {
         this.radioSortBy = document.querySelectorAll('input[type=radio][name="sort-by"]');
         this.radioSortOrder = document.querySelectorAll('input[type=radio][name="sort-order"]');
         this.checkboxFilter = document.querySelectorAll('input[type=checkbox]');
-        this.initListItemsNum = 4;
+        this.initListItemsNum = 20;
         this.appliedFilters = [];
         this.history = [];
         this.visibleEntries = this._sortByAge(this.entries, true);
