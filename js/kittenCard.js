@@ -1,14 +1,12 @@
-import Card from './base/card.js';
-
-class KittenCard extends Card {
+class KittenCard {
     constructor(item, action) {
-        super();
+        this.card = null;
         this.item = item;
         this.action = action;
     }
 
     renderCard() {
-        super.renderCard();
+        this.card = document.createElement('div');
         this.card.id = `kitten-${this.item.id}`;
         this.card.classList.add('kitten-search-card');
         this.card.addEventListener('click', () => this._onCardClick());
