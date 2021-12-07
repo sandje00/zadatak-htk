@@ -17,7 +17,7 @@ class KittenList {
         this.initListItemsNum = 20;
         this.appliedFilters = [];
         this.history = [];
-        this.visibleEntries = this._sortByAge(this.entries, true);
+        this.visibleEntries = numericSort(this.entries, 'age', true);
         this.currentSortBy = 'age';
         this.currentSortOrder = 'asc';
     }
@@ -40,15 +40,15 @@ class KittenList {
     
     sortByKey(key, order) {
         const isAscending = order === 'asc' || !(order === 'desc');
-        if (key == 'age') this.visibleEntries = this._sortByAge(this.visibleEntries, isAscending);
-        if (key == 'name') this.visibleEntries = this._sortByName(this.visibleEntries, isAscending);
+        if (key == 'age') this.visibleEntries = numericSort(this.visibleEntries, 'age', isAscending);
+        if (key == 'name') this.visibleEntries = alphabeticSort(this.visibleEntries, 'name', isAscending);
         return this.visibleEntries;
     }
     
     filterByKey(key, value) {
         this._updateHistory([...this.visibleEntries], key + '-' + value);
-        if (key === 'age') this.visibleEntries = this._filterByAge(value);
-        if (key === 'color') this.visibleEntries = this._filterByColor(value);
+        if (key === 'age') this.visibleEntries = filterLessEqual(this.visibleEntries, 'age', value);
+        if (key === 'color') this.visibleEntries = filterEqual(this.visibleEntries, 'color', value);;
         return this.visibleEntries;
     }
     
@@ -58,8 +58,8 @@ class KittenList {
 
     getTopN(n, key) {
         let sorted;
-        if (key == 'age') sorted = this._sortByAge(this.entries, true);
-        if (key == 'name') sorted = this._sortByName(this.entries, true);
+        if (key == 'age') sorted = numericSort(this.entries, 'age', true);
+        if (key == 'name') sorted = alphabeticSort(this.entries, 'name', true);
         return n <= sorted.length && sorted.slice(0, n);
     }
 
@@ -149,22 +149,6 @@ class KittenList {
         filters.forEach(({ key, value }) => { this.visibleEntries = this.filterByKey(key, value); });
         this.visibleEntries = this.sortByKey(this.currentSortBy, this.currentSortOrder);
         this.renderVisibleKittens(this.visibleEntries);
-    }
-    
-    _sortByAge(array, isAscending) {
-        return numericSort(array, 'age', isAscending);
-    }
-
-    _sortByName(array, isAscending) {
-        return alphabeticSort(array, 'name', isAscending);
-    }
-
-    _filterByAge(value) {
-        return filterLessEqual(this.visibleEntries, 'age', value);
-    }
-
-    _filterByColor(value) {
-        return filterEqual(this.visibleEntries, 'color', value);
     }
 }
 
