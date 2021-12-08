@@ -48,7 +48,8 @@ class KittenCarousel {
         const slideContent = document.createElement('img');
         slideContent.src = item.image;
         slideContent.alt = item.name;
-        slideContent.onmouseover = isActive ? () => this._onMouseOver() : null;
+        slideContent.onmouseover = isActive ? () => this._stopSlideShow() : null;
+        slideContent.onmouseout = isActive ? () => this._slideShow() : null;
         slideContent.onclick =  isActive ? () => this.action(item) : null;
         return slideContent;
     }
@@ -65,10 +66,6 @@ class KittenCarousel {
         this.current = this.previous
         this.previous = this.previous === 0 ? this.items.length - 1 : this.previous - 1;
         this._loadCarousel();
-    }
-
-    _onMouseOver() {
-        this._stopSlideShow();
     }
 
     _slideShow() {
