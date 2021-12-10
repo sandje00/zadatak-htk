@@ -6,7 +6,7 @@ class KittenModal extends Modal {
         this.event = event;
         this.kitten = null;
         this.card = null;
-        this.adoptButton = this.element.querySelectorAll('.modal-button')[this.offset];
+        this.adoptButton = this.element.querySelectorAll('.modal-button')[0];
     }
 
     init() {
@@ -20,8 +20,7 @@ class KittenModal extends Modal {
     showModal(kitten) {
         this.kitten = kitten;
         this.card = document.getElementById(`kitten-card-${kitten.id}`);
-        let kittenInfo = this._createKittenInfoElement();
-        this.content.insertBefore(kittenInfo, this.content.firstChild);
+        this.info.innerHTML = this._createKittenInfoContent();
         this.element.classList.toggle(`modal-${this.kitten.id}`);
         super.showModal();
     }
@@ -33,17 +32,13 @@ class KittenModal extends Modal {
         this._closeModal();
     }
 
-    _createKittenInfoElement() {
-        let kittenInfo = `
+    _createKittenInfoContent() {
+        return `
             <img src="${this.kitten.image}" alt="${this.kitten.name}">
             <h4>${this.kitten.name}</h4>
             <span class="align-self-start">Starost: ${this.kitten.age}</span>
             <span class="align-self-start">Boja: ${this.kitten.color}</span>
         `;
-        let kittenInfoContainer = document.createElement('div');
-        kittenInfoContainer.classList.add('kitten-info', 'flex-v', 'justify-center', 'align-center');
-        kittenInfoContainer.innerHTML = kittenInfo;
-        return kittenInfoContainer;
     }
 }
 

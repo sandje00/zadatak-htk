@@ -29,11 +29,14 @@ class KittenCarousel {
     _loadSlide(slide) {
         slide.innerHTML = '';
         if (slide.classList.contains('left-side'))
-            slide.appendChild(this._createSlideContent(this.items[this.previous]));
-        if (slide.classList.contains('active'))
-            slide.appendChild(this._createSlideContent(this.items[this.current], true));
+            slide.innerHTML = this._createSlideContent(this.items[this.previous]);
+        if (slide.classList.contains('active')) {
+            slide.innerHTML = this._createSlideContent(this.items[this.current]);
+            slide.childNodes[0].addEventListener('mouseover', () => this._stopSlideShow());
+            slide.childNodes[0].addEventListener('mouseout', () => this._slideShow());
+        }
         if (slide.classList.contains('right-side'))
-            slide.appendChild(this._createSlideContent(this.items[this.next]));
+            slide.innerHTML = this._createSlideContent(this.items[this.next]);
     }
 
     _onArrowClick(e) {
@@ -43,14 +46,8 @@ class KittenCarousel {
         if (arrow.classList.contains('left')) this._moveLeft();
     }
 
-    _createSlideContent(item, isActive = false) {
-        const slideContent = document.createElement('img');
-        slideContent.id = 'kitten-slide' + item.id;
-        slideContent.src = item.image;
-        slideContent.alt = item.name;
-        slideContent.onmouseover = isActive ? () => this._stopSlideShow() : null;
-        slideContent.onmouseout = isActive ? () => this._slideShow() : null;
-        return slideContent;
+    _createSlideContent(item) {
+        return `<img id="kitten-slide-${item.id}" src="${item.image}" alt="${item.name}">`;
     }
 
     _moveRight() {

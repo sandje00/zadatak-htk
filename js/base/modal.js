@@ -1,16 +1,16 @@
+import { extractNumberFromString } from '../utils/string.js';
 import { toggleMultipleClasses } from '../utils/dom.js';
 
 class Modal {
     constructor(element) {
         this.element = element;
-        this.offset = parseInt(this.element.id.slice(-1));
-        this.content = this.element.querySelectorAll('.modal-content')[this.offset];
+        this.info = this.element.querySelectorAll('.info')[0];
         this.closeElements = this.element.querySelectorAll('.modal-close');
     }
 
     init() {
         this.closeElements.forEach(el => el.addEventListener('click', () => {
-            let id = parseInt(this.element.classList[1].slice(-1));
+            let id = extractNumberFromString(this.element.classList[1]);
             this._closeModal(id);
         }));
     }
@@ -20,7 +20,7 @@ class Modal {
     }
 
     _closeModal(id) {
-        this.content.removeChild(this.content.firstChild);
+        this.info.innerHTML = '';
         toggleMultipleClasses(this.element, `modal-${id}`, 'display-none');
     }
 }
