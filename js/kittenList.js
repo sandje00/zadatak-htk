@@ -1,13 +1,12 @@
-import { filterByKeyword, filterEqual, filterLessEqual, filterNonMatches } from './utils/filter.js';
+import { filterByKeyword, filterEqual, filterLessEqual, filterNonMatches, findByKey } from './utils/filter.js';
 import { alphabeticSort, numericSort } from './utils/sort.js';
 import { hide, updateKittenList } from './utils/dom.js';
 import debounce from './utils/debounce.js';
 import KittenCard from './kittenCard.js';
 
 class KittenList {
-    constructor(entries, action) {
+    constructor(entries) {
         this.entries = entries;
-        this.action = action;
         this.initListItemsNum = 20;
         this.appliedFilters = [];
         this.currentSortBy = 'age';
@@ -39,8 +38,8 @@ class KittenList {
     renderVisibleKittens(kittens) {
         if (this.searchList.hasChildNodes()) this.searchList.innerHTML = '';
         kittens.forEach(kitten => {
-            let el = new KittenCard(kitten, this.action).renderCard();
-            this.searchList.appendChild(el);
+            let el = new KittenCard(kitten).createCardcontent();
+            this.searchList.innerHTML += el;
         });
         return this;
     }
@@ -53,6 +52,10 @@ class KittenList {
                 hide(this.showMoreButton);
             }
         }
+    }
+
+    findEntry(id) {
+        return findByKey(this.entries, 'id', id);
     }
 
     removeEntry(id) {

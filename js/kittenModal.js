@@ -19,7 +19,7 @@ class KittenModal extends Modal {
     
     showModal(kitten) {
         this.kitten = kitten;
-        this.card = document.getElementById(`kitten-${kitten.id}`);
+        this.card = document.getElementById(`kitten-card-${kitten.id}`);
         let kittenInfo = this._createKittenInfoElement();
         this.content.insertBefore(kittenInfo, this.content.firstChild);
         this.element.classList.toggle(`modal-${this.kitten.id}`);
@@ -29,7 +29,7 @@ class KittenModal extends Modal {
     _adoptKitten() {
         this.event.detail.kittenId = this.kitten.id;
         this.element.dispatchEvent(this.event);
-        this.card.remove();
+        if (this.card) this.card.remove();
         this._closeModal();
     }
 

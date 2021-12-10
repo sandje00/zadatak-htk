@@ -1,9 +1,8 @@
 class KittenCarousel {
-    constructor(items, element, animate, action) {
+    constructor(items, element, animate) {
         this.items = items;
         this.element = element;
         this.animate = animate;
-        this.action = action;
         this.slides = this.element.querySelectorAll('.carousel-slide');
         this.arrows = this.element.querySelectorAll('.carousel-button');
         this.current = 0;
@@ -46,11 +45,11 @@ class KittenCarousel {
 
     _createSlideContent(item, isActive = false) {
         const slideContent = document.createElement('img');
+        slideContent.id = 'kitten-slide' + item.id;
         slideContent.src = item.image;
         slideContent.alt = item.name;
         slideContent.onmouseover = isActive ? () => this._stopSlideShow() : null;
         slideContent.onmouseout = isActive ? () => this._slideShow() : null;
-        slideContent.onclick =  isActive ? () => this.action(item) : null;
         return slideContent;
     }
 

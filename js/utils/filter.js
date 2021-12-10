@@ -16,3 +16,7 @@ export function filterLessEqual(src, key, value) {
 export function filterNonMatches(src, key, value) {
     return src.filter(it => it[key] !== value);
 }
+
+export function findByKey(src, key, value) {
+    return src.find(it => it[key] === value);
+}

@@ -1,3 +1,4 @@
+import { extractNumberFromString } from './js/utils/string.js';
 import { kittenAdoptedEvent } from './js/events.js';
 import KittenCarousel from './js/kittenCarousel.js';
 import KittenModal from './js/kittenModal.js';
@@ -10,7 +11,7 @@ async function loadJSON(path) {
 
 async function main() {
     const data = await loadJSON('/kittens.json');
-    localStorage.setItem('kittens', JSON.stringify(data))
+    localStorage.setItem('kittens', JSON.stringify(data));
 }
 
 main();
@@ -18,17 +19,23 @@ main();
 const kittenModal = new KittenModal(document.getElementById('kitten-modal-0'), kittenAdoptedEvent);
 kittenModal.init();
 
-const showKittenModal = kitten => kittenModal.showModal(kitten);
-
-const kittens = new Kittens(JSON.parse(localStorage.getItem('kittens')), showKittenModal);
+const kittens = new Kittens(JSON.parse(localStorage.getItem('kittens')));
 kittens.init();
 
 const NUMBER_OF_CAROUSEL_ITEMS = 4;
 const carouselItems = kittens.getTopN(NUMBER_OF_CAROUSEL_ITEMS, 'age');
 const carouselElement = document.getElementById('kitten-carousel');
 const isCarouselAnimated = true;
-const carousel = new KittenCarousel(carouselItems, carouselElement, isCarouselAnimated, showKittenModal);
+const carousel = new KittenCarousel(carouselItems, carouselElement, isCarouselAnimated);
 carousel.init();
+
+document.addEventListener('click', e => {
+    if (e.target.closest('.kitten-search-card') || e.target.closest('.carousel-slide')) {
+        const el = e.target.closest('.kitten-search-card') || e.target;
+        const id = extractNumberFromString(el.id);
+        kittenModal.showModal(kittens.findEntry(id));
+    }
+});
 
 document.addEventListener('kittens-updated', e => kittens.renderVisibleKittens(e.detail.kittens) && (kittens.hideShowMoreButton())());
 
