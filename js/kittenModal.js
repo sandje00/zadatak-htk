@@ -1,16 +1,16 @@
-import Modal from './base/modal.js';
-
-class KittenModal extends Modal {
+class KittenModal {
     constructor(element, event) {
-        super(element);
+        this.element = element;
         this.event = event;
         this.kitten = null;
         this.card = null;
+        this.info = this.element.querySelectorAll('.info')[0];
         this.adoptButton = this.element.querySelectorAll('.modal-button')[0];
+        this.closeElements = this.element.querySelectorAll('.modal-close');
     }
 
     init() {
-        super.init();
+        this.closeElements.forEach(el => el.addEventListener('click', () => this._closeModal()));
         this.adoptButton.addEventListener('click', () => {
             let result = confirm(`Jeste li sigurni da zelite udomiti macica po imenu ${this.kitten.name}?`);
             if (result) this._adoptKitten(this.kitten.id);
@@ -21,8 +21,12 @@ class KittenModal extends Modal {
         this.kitten = kitten;
         this.card = document.getElementById(`kitten-card-${kitten.id}`);
         this.info.innerHTML = this._createKittenInfoContent();
-        this.element.classList.toggle(`modal-${this.kitten.id}`);
-        super.showModal();
+        this.element.classList.toggle('display-none');
+    }
+
+    _closeModal() {
+        this.info.innerHTML = '';
+        this.element.classList.toggle('display-none');
     }
 
     _adoptKitten() {

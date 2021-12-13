@@ -16,7 +16,7 @@ async function main() {
 
 main();
 
-const kittenModal = new KittenModal(document.getElementById('kitten-modal-0'), kittenAdoptedEvent);
+const kittenModal = new KittenModal(document.getElementById('kitten-modal'), kittenAdoptedEvent);
 kittenModal.init();
 
 const kittens = new Kittens(JSON.parse(localStorage.getItem('kittens')));
