@@ -3,12 +3,12 @@ class KittenCarousel {
         this.items = items;
         this.element = element;
         this.animate = animate;
-        this.slides = this.element.querySelectorAll('.carousel-slide');
-        this.arrows = this.element.querySelectorAll('.carousel-button');
         this.current = 0;
         this.previous = this.items.length - 1;
         this.next = this.current + 1;
         this.slideShowTimeout = null;
+        this.slides = this.element.querySelectorAll('.carousel-slide');
+        this.arrows = this.element.querySelectorAll('.carousel-button');
     }
 
     init() {
@@ -26,6 +26,13 @@ class KittenCarousel {
         if (this.animate) this.slideShowTimeout = this._slideShow();
     }
 
+    _onArrowClick(e) {
+        this._stopSlideShow();
+        const arrow = e.target.closest('.carousel-button');
+        if (arrow.classList.contains('right')) this._moveRight();
+        if (arrow.classList.contains('left')) this._moveLeft();
+    }
+
     _loadSlide(slide) {
         slide.innerHTML = '';
         if (slide.classList.contains('left-side'))
@@ -37,17 +44,6 @@ class KittenCarousel {
         }
         if (slide.classList.contains('right-side'))
             slide.innerHTML = this._createSlideContent(this.items[this.next]);
-    }
-
-    _onArrowClick(e) {
-        this._stopSlideShow();
-        const arrow = e.target.closest('.carousel-button');
-        if (arrow.classList.contains('right')) this._moveRight();
-        if (arrow.classList.contains('left')) this._moveLeft();
-    }
-
-    _createSlideContent(item) {
-        return `<img id="kitten-slide-${item.id}" src="${item.image}" alt="${item.name}">`;
     }
 
     _moveRight() {
@@ -62,6 +58,10 @@ class KittenCarousel {
         this.current = this.previous
         this.previous = this.previous === 0 ? this.items.length - 1 : this.previous - 1;
         this._loadCarousel();
+    }
+
+    _createSlideContent(item) {
+        return `<img id="kitten-slide-${item.id}" src="${item.image}" alt="${item.name}">`;
     }
 
     _slideShow() {

@@ -23,16 +23,16 @@ class KittenModal {
         this.element.classList.toggle('display-none');
     }
 
-    _closeModal() {
-        this.info.innerHTML = '';
-        this.element.classList.toggle('display-none');
-    }
-
     _adoptKitten() {
         this.event.detail.kittenId = this.kitten.id;
         this.element.dispatchEvent(this.event);
         if (this.card) this.card.remove();
         this._closeModal();
+    }
+
+    _closeModal() {
+        this.info.innerHTML = '';
+        this.element.classList.toggle('display-none');
     }
 
     _createKittenInfoContent() {

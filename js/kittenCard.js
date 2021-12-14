@@ -1,7 +1,7 @@
 class KittenCard {
     constructor(item) {
-        this.card = null;
         this.item = item;
+        this.card = null;
     }
 
     createCardcontent() {
