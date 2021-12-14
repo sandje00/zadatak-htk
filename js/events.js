@@ -11,3 +11,10 @@ export const kittensUpdatedEvent = new CustomEvent('kittens-updated', {
     cancelable: true,
     composed: false
 });
+
+export const confirmEvent = new CustomEvent('confirm', {
+    detail: {},
+    bubbles: true,
+    cancelable: true,
+    composed: false
+});

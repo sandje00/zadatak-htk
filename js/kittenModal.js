@@ -1,7 +1,8 @@
 class KittenModal {
-    constructor(element, event) {
+    constructor(element, event, popup) {
         this.element = element;
         this.event = event;
+        this.popup = popup;
         this.kitten = null;
         this.card = null;
         this.info = this.element.querySelectorAll('.info')[0];
@@ -10,11 +11,9 @@ class KittenModal {
     }
 
     init() {
+        this.element.addEventListener('confirm', e => e.detail.result && this._adoptKitten(this.kitten.id));
         this.closeElements.forEach(el => el.addEventListener('click', () => this._closeModal()));
-        this.adoptButton.addEventListener('click', () => {
-            let result = confirm(`Jeste li sigurni da zelite udomiti macica po imenu ${this.kitten.name}?`);
-            if (result) this._adoptKitten(this.kitten.id);
-        });
+        this.adoptButton.addEventListener('click', () => this.popup.togglePopup(this.kitten.name));
     }
     
     showModal(kitten) {
