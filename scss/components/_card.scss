@@ -9,18 +9,6 @@
     margin-right: 2rem;
     overflow: hidden;
 
-    @media(min-width: $measure-s) {
-        width: 40%;
-    }
-
-    @media(min-width: $measure-l) {
-        width: 30%;
-    }
-
-    @media(min-width: $measure-xxxl) {
-        width: 20%;
-    }
-
     &:hover {
         box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     }
