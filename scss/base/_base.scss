@@ -18,6 +18,9 @@ main {
 button {
     border: none;
     cursor: pointer;
+    font-weight: 700;
+    padding: 0.5rem 2rem;
+    border-radius: 8px;
 }
 
 .display-none {
@@ -28,15 +31,22 @@ button {
     background: none;
 }
 
-.button-accent {
-    background-color: $color-accent;
-    color: $color-white;
-    font-weight: 700;
-    padding: 0.5rem 2rem;
-    border-radius: 8px;
-    cursor: pointer;
+.button {
+    &-accent {
+        background-color: $color-accent;
+        color: $color-white;
 
-    &:hover {
-        background-color: $color-accent-light;
+        &:hover {
+            background-color: $color-accent-light;
+        }
+    }
+
+    &-neutral {
+        background-color: $color-primary;
+        color: $color-primary-dark;
+
+        &:hover {
+            background-color: $color-primary-light;
+        }
     }
 }

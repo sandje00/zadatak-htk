@@ -1,0 +1,23 @@
+.popup {
+    z-index: 60;
+    position: fixed;
+    top: 1%;
+    right: 50%;
+    transform: translateX(50%);
+    width: 300px;
+    height: 150px;
+    background-color: $color-white;
+    border-radius: 5px;
+
+    &-content {
+        z-index: 70;
+
+        p {
+            padding: 0.7rem;
+        }
+
+        button {
+            margin: 0 0.5rem;
+        }
+    }
+}

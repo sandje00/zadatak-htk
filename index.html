@@ -93,20 +93,33 @@
             <button id="show-more" class="dashboard-button button-accent">
                 Prikaži više
             </button>
-            <div id="kitten-modal" class="modal display-none">
-                <div class="modal-overlay modal-close"></div>
-                <div class="modal-content flex-v">
-                    <div class="info flex-v justify-center align-center"></div>
-                    <button class="modal-button button-accent align-self-center">
-                        Udomi
-                    </button>
-                    <button class="icon-button modal-close-button modal-close">
-                        <span class="close"></span>
-                    </button>
-                </div>
-            </div>
         </div>
     </main>
+    <div id="kitten-modal" class="modal display-none">
+        <div class="modal-overlay modal-close"></div>
+        <div class="modal-content flex-v">
+            <div class="info flex-v justify-center align-center"></div>
+            <button class="modal-button button-accent align-self-center">
+                Udomi
+            </button>
+            <button class="icon-button modal-close-button modal-close">
+                <span class="close"></span>
+            </button>
+        </div>
+    </div>
+    <div id="kitten-popup" class="popup display-none">
+        <div class="popup-content">
+            <p></p>
+            <div class="popup-control flex-h justify-center align-center">
+                <button id="popup-ok" class="button-accent">
+                    OK
+                </button>
+                <button id="popup-cancel" class="button-neutral">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
     <script type="module" src="script.js"></script>
 </body>
 </html>
