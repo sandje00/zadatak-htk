@@ -3,7 +3,7 @@
     margin-right: 3rem;
     font-size: 1.2rem;
 
-    @media(max-width: 600px) {
+    @media(max-width: $measure-xs) {
         margin-right: 1.2rem;
         font-size: 1.1rem;
     }
@@ -24,7 +24,7 @@
             width: 0;
         }
 
-        .checkmark {
+        .custom-box {
             position: absolute;
             top: 0;
             left: 0;
@@ -39,12 +39,12 @@
             }
         }
         
-        &:hover input ~ .checkmark {
+        &:hover input ~ .custom-box {
             border: 1px solid $color-accent;
             box-shadow: 0 0 8px 2px $color-accent;
         }
 
-        input:checked ~ .checkmark {
+        input:checked ~ .custom-box {
             background-color: $color-accent;
 
             &:after {

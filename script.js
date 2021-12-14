@@ -33,10 +33,9 @@ const isCarouselAnimated = true;
 const carousel = new KittenCarousel(carouselItems, carouselElement, isCarouselAnimated);
 carousel.init();
 
-
 document.addEventListener('click', e => {
-    if (e.target.closest('.kitten-search-card') || e.target.closest('.carousel-slide')) {
-        const el = e.target.closest('.kitten-search-card') || e.target;
+    if (e.target.closest('.card') || e.target.closest('.carousel-slide')) {
+        const el = e.target.closest('.card') || e.target;
         const id = extractNumberFromString(el.id);
         kittenModal.showModal(kittens.findEntry(id));
     }

@@ -6,7 +6,7 @@ class KittenCard {
 
     createCardcontent() {
         return `
-            <div id="kitten-card-${this.item.id}" class="kitten-search-card">
+            <div id="kitten-card-${this.item.id}" class="card">
                 <img src="${this.item.image}" alt="${this.item.name}">
                 <div class="container flex-v align-left">
                     <h4>${this.item.name}</h4>
