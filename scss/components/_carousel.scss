@@ -78,12 +78,12 @@
         position: absolute;
         top: 50%;
 
-        /* &.left {
-            right: 5%;
+        &.left {
+            right: 0;
         }
 
         &.right {
-            left: 5%;
-        } */
+            left: 0;
+        }
     }
 }

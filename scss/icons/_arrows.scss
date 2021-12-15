@@ -1,60 +1,14 @@
 .arrow {
-    width: 100px;
-    height: 100px;
+    border: solid $color-primary-dark;
+    border-width: 0 8px 8px 0;
     display: inline-block;
-    position: relative;
+    padding: 8px;
 
-    @media(max-width: 700px) {
-        width: 50px;
-        height: 50px;
-    }
-
-    &::before {
-        content: '';
-        display: block;
-        width: 30px;
-        height: 30px;
-        top: 50%;
-        left: 50%;
-        border-style: solid;
-        border-color: $color-primary-dark;
-        border-width: 4px 4px 0 0;
-        position: absolute;
-        transform-origin: 50% 50%;
+    &.left {
+        transform: rotate(135deg);
     }
 
-    &.left::before { 
-        transform: rotate(-135deg);
-        margin: -15px 0 0 -10px;
-    }
-
-    &.right::before { 
-        transform: rotate(45deg); 
-        margin: -15px 0 0 -22px;
-    }
-  
-    &::after {
-        content: '';
-        display: block;
-        top: 50%;
-        left: 50%;
-        border-style: solid;
-        border-color: $color-primary-dark;
-        position: absolute;
-        transform-origin: 50% 50%;
-    }
-  
-    &.left::after { 
-        width: 40px;
-        height: 0;
-        border-width: 4px 0 0 0;
-        transform: translate(-14px, -1px);
-    }
-  
-    &.right::after { 
-        width: 40px;
-        height: 0;
-        border-width: 4px 0 0 0;
-        transform: translate(-26px, -1px);
+    &.right {
+        transform: rotate(-45deg);
     }
 }
