@@ -16,15 +16,15 @@
         img {
             width: 400px;
             height: 400px;
+            margin: 0 0.5rem;
             object-fit: cover;
             opacity: 0.2;
-            transition: opacity .3s ease-in-out;
+            border-radius: 5px;
         }
 
         .active {
             img {
                 opacity: 1;
-                transition: transform .2s ease;
 
                 @media(max-width: $measure-m) {
                     width: 300px;
@@ -39,7 +39,28 @@
                 &:hover {
                     cursor: pointer;
                     transform: scale(1.2);
+                    transition: all 1s;
                 }
+            }
+        }
+
+        .left-side {
+            img {
+                height: 400px;
+                width: 150px;
+                transform: skewy(5deg);
+                transform-origin: top right;
+                transition: all 1s;
+            }
+        }
+
+        .right-side {
+            img {
+                height: 400px;
+                width: 150px;
+                transform: skewy(-5deg);
+                transform-origin: top left;
+                transition: all 1s;
             }
         }
 
@@ -57,12 +78,12 @@
         position: absolute;
         top: 50%;
 
-        &.left {
-            right: 10%;
+        /* &.left {
+            right: 5%;
         }
 
         &.right {
-            left: 10%;
-        }
+            left: 5%;
+        } */
     }
 }
