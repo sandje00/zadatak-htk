@@ -13,22 +13,5 @@
 
     &-button {
         margin-bottom: 2rem;
-        position: relative;
-
-        @media(min-width: $measure-xxxs) {
-            left: 20%;
-        }
-
-        @media(min-width: $measure-xs) {
-            left: 32%;
-        }
-
-        @media(min-width: $measure-xxl) {
-            left: 24%;
-        }
-
-        @media(min-width: $measure-xxxl) {
-            left: 37.5%;
-        }
     }
 }
