@@ -13,7 +13,11 @@ class KittenCarousel {
 
     init() {
         this._loadCarousel();
-        this.arrows.forEach(arrow => arrow.addEventListener('click', e => this._onArrowClick(e)));
+        this.arrows.forEach(arrow => {
+            arrow.addEventListener('click', e => this._onArrowClick(e));
+            arrow.addEventListener('mouseenter', () => this._stopSlideShow());
+            arrow.addEventListener('mouseleave', () => this._slideShow());
+        });
     }
 
     refreshContent(items) {
@@ -27,7 +31,6 @@ class KittenCarousel {
     }
 
     _onArrowClick(e) {
-        this._stopSlideShow();
         const arrow = e.target.closest('.carousel-button');
         if (arrow.classList.contains('right')) this._moveRight();
         if (arrow.classList.contains('left')) this._moveLeft();
@@ -39,8 +42,8 @@ class KittenCarousel {
             slide.innerHTML = this._createSlideContent(this.items[this.previous]);
         if (slide.classList.contains('active')) {
             slide.innerHTML = this._createSlideContent(this.items[this.current]);
-            slide.childNodes[0].addEventListener('mouseover', () => this._stopSlideShow());
-            slide.childNodes[0].addEventListener('mouseout', () => this._slideShow());
+            slide.childNodes[0].addEventListener('mouseenter', () => this._stopSlideShow());
+            slide.childNodes[0].addEventListener('mouseleave', () => this._slideShow());
         }
         if (slide.classList.contains('right-side'))
             slide.innerHTML = this._createSlideContent(this.items[this.next]);
@@ -65,6 +68,7 @@ class KittenCarousel {
     }
 
     _slideShow() {
+        if (!this.animate) this.animate = true;
         return setTimeout(() => this._moveRight(), 5000);
     }
 
